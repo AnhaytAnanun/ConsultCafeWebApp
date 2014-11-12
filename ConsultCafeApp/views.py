@@ -24,7 +24,7 @@ def locToBus(request):
 def menuGenerator(request):
 	return render(request, 'menuGenerator.html')
 
-from ConsultCafe.models import Resto
+from ConsultCafeApp.models import Resto
 from datetime import datetime
 
 def add(request):
