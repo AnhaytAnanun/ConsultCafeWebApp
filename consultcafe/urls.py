@@ -13,6 +13,10 @@ urlpatterns = patterns('',
 
     url(r'^$', views.main),
     url(r'^login$', views.login),
+    url(r'^busToLoc$', views.busToLoc),
+    url(r'^locToBus$', views.locToBus),
+    url(r'^heatMap$', views.heatMap),
+    url(r'^menuGenerator$', views.menuGenerator),
 
     ##
     # Admin panel urls
