@@ -1,6 +1,8 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from ConsultCafe import views
+from ConsultCafeApp import views
+from ConsultCafeApp.api import resto
+from ConsultCafeApp.adminPanel import restos
 
 urlpatterns = patterns('',
     # Examples:
@@ -9,7 +11,10 @@ urlpatterns = patterns('',
 
     # url(r'^admin/', include(admin.site.urls)),
 
-    url('api/resto/add', views.add),
+    url(r'^api/resto/$', resto.plainRouter),
+    url(r'^api/resto/(?P<id>[0-9]+)/$', resto.idRouter),
+
+    url(r'^admin/restos/$', restos.restos)
 
     # url('', views.main),
 )
