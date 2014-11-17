@@ -1,15 +1,15 @@
-<!--{% load staticfiles %}-->
+{% load staticfiles %}
 
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="../static/vendor/css/bootstrap.css">
-		<link rel="stylesheet" type="text/css" href="../static/css/main.css">
+		<link rel="stylesheet" type="text/css" href={% static "../vendor/css/bootstrap.css" %}>
+		<link rel="stylesheet" type="text/css" href={% static "../css/main.css" %}>
 		<link href='http://fonts.googleapis.com/css?family=Ubuntu:400,500' rel='stylesheet' type='text/css'>
 		<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-		<script src="../static/js/map.js"></script>
-		<script src="../static/vendor/js/bootstrap.min.js"></script>
+		<script src={% static "../js/map.js" }></script>
+		<script src={% static "../vendor/js/bootstrap.min.js" }></script>
 		<script>
 			window.onload = function() {
 				initMap('map-canvas');

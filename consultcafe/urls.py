@@ -11,10 +11,15 @@ urlpatterns = patterns('',
 
     # url(r'^admin/', include(admin.site.urls)),
 
+    url(r'^$', views.main),
+    url(r'^login$', views.login),
+
+    ##
+    # Admin panel urls
+    ##
+
     url(r'^api/resto/$', resto.plainRouter),
     url(r'^api/resto/(?P<id>[0-9]+)/$', resto.idRouter),
 
     url(r'^admin/restos/$', restos.restos)
-
-    # url('', views.main),
 )
