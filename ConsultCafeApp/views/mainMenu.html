@@ -1,0 +1,44 @@
+<!--{% load staticfiles %}-->
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="../static/vendor/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="../static/css/main.css">
+		<link href='http://fonts.googleapis.com/css?family=Ubuntu:400,500' rel='stylesheet' type='text/css'>
+		<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="../static/js/map.js"></script>
+		<script src="../static/vendor/js/bootstrap.min.js"></script>
+		<script>
+			window.onload = function() {
+				initMap('map-canvas');
+			};
+		
+		</script>
+	</head>
+	<body>
+		<div id="map-canvas" class="fullscreen"></div>
+		<div class="horseshit fullscreen">
+			<div class="container middlediv">
+				<div class="row">
+					<div class="col-xs-6 upper-left">
+						business location
+					</div>
+					<div class="col-xs-6 upper-right">
+						business type
+					</div>
+				</div>
+				<hr>
+				<div class="row">
+					<div class="col-xs-6 lower-left">
+						heatmaps
+					</div>
+					<div class="col-xs-6 lower-right">
+						menu suggestion
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

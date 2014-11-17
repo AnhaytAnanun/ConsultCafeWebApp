@@ -1,14 +1,15 @@
-{% load staticfiles %}
+<!--{% load staticfiles %}-->
 
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="{% static "vendor/css/bootstrap.min.css" %}">
-		<link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}">
+		<link rel="stylesheet" type="text/css" href="../static/vendor/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="../static/css/main.css">
+		<link href='http://fonts.googleapis.com/css?family=Ubuntu:400,500' rel='stylesheet' type='text/css'>
 		<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-		<script src="{% static "js/map.js" %}"></script>
-		<script src="{% static "vendor/js/bootstrap.min.js" %}"></script>
+		<script src="../static/js/map.js"></script>
+		<script src="../static/vendor/js/bootstrap.min.js"></script>
 		<script>
 			window.onload = function() {
 				initMap('map-canvas');
@@ -17,6 +18,28 @@
 		</script>
 	</head>
 	<body>
-		<div id="map-canvas" class="fullscreen"></div>
+		<div class="container fullscreen">
+			<div class="row fullheight">
+				<div class="col-xs-2 fullheight sidebar">
+				  <button type="button" class="btn btn-primary sidebarbutton">Left</button>
+				  <button type="button" class="btn btn-primary sidebarbutton">Middle</button>
+				  <button type="button" class="btn btn-primary sidebarbutton">Right</button>
+				</div>
+				<div class="col-xs-10 fullheight">
+					<div id="map-canvas" class="fullscreen">
+					</div>
+					<div class="horseshit fullscreen">
+						<div class="menusuggestion">
+						</div>
+						<div class="footerbar">
+						  <button type="button" class="btn btn-primary footerbarbutton leftmostbutton">Left</button>
+						  <button type="button" class="btn btn-primary footerbarbutton">Middle</button>
+						  <button type="button" class="btn btn-primary footerbarbutton">Right</button>
+						  <button type="button" class="btn btn-primary footerbarbutton">Right</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</body>
 </html>
