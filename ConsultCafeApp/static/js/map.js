@@ -9,5 +9,5 @@ var initMap = function(mapId) {
           	zoom: 16,
           	streetViewControl: false
     };
-	var map = new google.maps.Map(document.getElementById(mapId), mapOptions);
+	return new google.maps.Map(document.getElementById(mapId), mapOptions);
 }

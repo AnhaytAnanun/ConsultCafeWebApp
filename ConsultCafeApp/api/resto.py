@@ -35,6 +35,7 @@ def add(request):
 	resto = Resto(
 			name=data['name'],
 			type=data['type'],
+			kitchen=data['kitchen'],
 			location='POINT(%s %s)' % (data['longitude'], data['lattitude']),
 			customers=data['customers'],
 			wages=data['wages'],
@@ -62,6 +63,7 @@ def edit(request, id):
 	Resto.objects.filter(pk=id).update(
 		name=data.get('name', resto.name),
 		type=data.get('type', resto.type),
+		kitchen=data.get('kitchen', resto.kitchen),
 		location='POINT(%s %s)' % (longitude, lattitude),
 		customers=data.get('customers', resto.customers),
 		wages=data.get('wages', resto.wages),

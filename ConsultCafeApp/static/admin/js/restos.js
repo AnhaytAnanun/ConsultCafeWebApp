@@ -34,6 +34,7 @@ function requestRestos() {
 		var row = createRow({
 			name: 'name',
 			type: 'type',
+			kitchen: 'kitchen',
 			location: 'POINT (longitude lattitude)',
 			customers: 'customers',
 			wages: 'wages',
@@ -52,6 +53,7 @@ function createRow(entry, id) {
 	cellArray.push($('<td>' + id + '</td>').attr({id: 'id_' + id}));
 	cellArray.push($('<td><input type="text" value="' + entry.name + '"></td>').attr({id: 'name_' + id}));
 	cellArray.push($('<td><input type="text" value="' + entry.type + '"></td>').attr({id: 'type_' + id}));
+	cellArray.push($('<td><input type="text" value="' + entry.kitchen + '"></td>').attr({id: 'kitchen_' + id}));
 
 	var point = entry.location;
 	var point = point.substr(5, point.length).split(' ');
@@ -88,6 +90,7 @@ function createRow(entry, id) {
 function saveChanges(id) {
 	var data = {
 		name: $('#name_' + id + ' :input').val(),
+		kitchen: $('#kitchen_' + id + ' :input').val(),
 		type: $('#type_' + id + ' :input').val(),
 		longitude: $('#longitude_' + id + ' :input').val(),
 		lattitude: $('#lattitude_' + id + ' :input').val(),
@@ -127,6 +130,7 @@ function removeEntry(id) {
 function saveNew() {
 	var data = {
 		name: $('#name_new :input').val(),
+		kitchen: $('#kitchen_new :input').val(),
 		type: $('#type_new :input').val(),
 		longitude: $('#longitude_new :input').val(),
 		lattitude: $('#lattitude_new :input').val(),
