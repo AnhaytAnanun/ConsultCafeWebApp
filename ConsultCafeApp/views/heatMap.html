@@ -1,9 +1,9 @@
-<!--{% load staticfiles %}-->
+{% load staticfiles %}
 
 <!DOCTYPE html>
 <html>
 	<head>
-<!--	<link rel="stylesheet" type="text/css" href={% static "vendor/css/bootstrap.css" %}>
+		<link rel="stylesheet" type="text/css" href={% static "vendor/css/bootstrap.css" %}>
 		<link rel="stylesheet" type="text/css" href={% static "css/main.css" %}>
 		<link href='http://fonts.googleapis.com/css?family=Ubuntu:400,500' rel='stylesheet' type='text/css'>
 		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=visualization,geometry"></script>
@@ -12,8 +12,8 @@
 		<script src={% static "js/resto.js" %}></script>
 		<script src={% static "js/heatmap.js" %}></script>
 		<script src={% static "js/mercator.js" %}></script>
-		<script src={% static "vendor/js/bootstrap.min.js" %}></script>	--->
-		<link rel="stylesheet" type="text/css" href="../static/vendor/css/bootstrap.css">
+		<script src={% static "vendor/js/bootstrap.min.js" %}></script>
+		<!-- <link rel="stylesheet" type="text/css" href="../static/vendor/css/bootstrap.css">
 		<link rel="stylesheet" type="text/css" href="../static/css/main.css">
 		<link href='http://fonts.googleapis.com/css?family=Ubuntu:400,500' rel='stylesheet' type='text/css'>
 		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=visualization,geometry"></script>
@@ -22,18 +22,22 @@
 		<script src="../static/js/resto.js"></script>
 		<script src="../static/js/heatmap.js"></script>
 		<script src="../static/js/mercator.js"></script>
-		<script src="../static/vendor/js/bootstrap.min.js"></script>
+		<script src="../static/vendor/js/bootstrap.min.js"></script> -->
 		<script>
+			var map;
+			var heatMap;
+
 			function initialize() {
-				var map = initMap('map-canvas');
-				var heatMap = new HeatMap();
+				map = initMap('map-canvas');
+				heatMap = new HeatMap();
 				heatMap.generate(map);
 			};
 			google.maps.event.addDomListener(window, 'load', initialize);
 		</script>
 		<script>
 			function outputUpdate(rad) {
-				document.querySelector("#radiusdisplay").value=rad;
+				heatMap.setRadius(rad);
+				document.querySelector("#radiusdisplay").value = rad;
 			};
 			function viewSubmenu(menu) {
 				$(menu).find('.submenu').show(300);
@@ -51,10 +55,16 @@
 					<div onmouseleave="closeSubmenu(this)" onmouseenter="viewSubmenu(this)">
 						<button type="button" class="btn btn-primary sidebarbutton">Restaurants</button>
 						<div class="submenu">
-							<button type="button" class="btn btn-primary sidebarbutton">Restaurants</button>
+							<div>
+								<label>Type</label>
+								<button type="button" class="btn btn-primary submenubutton" data-toggle="modal" data-target="#menumodal">+</button>
+							</div>
+							<div>
+								<label>Kitchen</label>
+								<button type="button" class="submenubutton">+</button>
+							</div>
 						</div>
 					</div>
-					<button type="button" class="btn btn-primary sidebarbutton">Restaurants</button>
 				</div>
 				<div class="col-xs-10 fullheight">
 					<div id="map-canvas" class="fullscreen">
@@ -64,11 +74,16 @@
 							<label class="colorwhite" for="radius">Radius</label>
 							<output class="colorwhite" for="radius" id="radiusdisplay" style="display:inline; padding-left:2px;">100</output>
 							<label class="colorwhite" for="radius">meters</label>
-							<input type="range" min=10 max=1000 step=5 id="radius" value=100 oninput="outputUpdate(value)">							
+							<input type="range" min=10 max=1000 step=5 id="radius" value=100 oninput="outputUpdate(value)">
 						</div>
 					</div>
 				</div>
 			</div>
+		</div>
+
+		<!-- Modals -->
+		<div class="modal fade" id="menumodal" tabindex="-1" role="dialog">
+			<div class="modal-dialog">
 		</div>
 	</body>
 </html>

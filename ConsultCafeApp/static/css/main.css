@@ -100,6 +100,7 @@
 
 .submenu {
 	display: none;
+	padding-left: 30px;
 }
 
 .sidebarbutton {
@@ -107,9 +108,17 @@
 	padding: 10px;
 	text-align: left;
 	text-indent: 1;
-	background: #e48312
+	background: #e48312;
 	border: none;
 	border-radius: 0;
+}
+
+.submenubutton {
+	background: #e48312;
+	border: 1px solid black;
+	display: inline;
+	position: absolute;
+	right: 10px;
 }
 
 .footerbarbutton {

@@ -1,9 +1,11 @@
 function HeatMap() {
+	var heatmap;
+	var radius = 100;
+
 	this.generate = function(map) {
 		var resto = new Resto();
 		resto.query({}, function(data) {
 			var coords = [];
-			var heatmapVisual;
 
 			for (var i = data.length - 1 ; i >= 0 ; i--) {
 				var latLng = extractLatLng(data[i].fields.location);
@@ -11,17 +13,24 @@ function HeatMap() {
 			}
 
 			coords = new google.maps.MVCArray(coords);
-			heatmapVisual = new google.maps.visualization.HeatmapLayer({
+			heatmap = new google.maps.visualization.HeatmapLayer({
 				data: coords,
-				radius: getNewRadius(map, 100)
+				radius: getNewRadius(map, radius)
 			});
 			google.maps.event.addListener(map, 'zoom_changed', function () {
-             	heatmapVisual.setOptions({
-             		radius: getNewRadius(map, 100)
+             	heatmap.setOptions({
+             		radius: getNewRadius(map, radius)
              	});
           	});
-          	heatmapVisual.setMap(map);
+          	heatmap.setMap(map);
 		});
+	}
+
+	this.setRadius = function(rad) {
+		radius = rad;
+		heatmap.setOptions({
+     		radius: getNewRadius(map, radius)
+     	});
 	}
 
 	function extractLatLng(point) {
