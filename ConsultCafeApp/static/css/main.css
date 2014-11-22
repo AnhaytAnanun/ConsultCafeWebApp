@@ -98,6 +98,10 @@
 	font-family: Ubuntu;
 }
 
+.submenu {
+	display: none;
+}
+
 .sidebarbutton {
 	width: 100%;
 	padding: 10px;
@@ -143,6 +147,21 @@
 	left: 20%;
 	width: 50%;
 	height: 50%;
+}
+
+.heatmapmenu {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	padding: 10px;
+	width: auto;
+	background: #e48312;
+	z-index: 1;
+	border-radius: 10px;
+}
+
+.colorwhite {
+	color: white;
 }
 
 body {
