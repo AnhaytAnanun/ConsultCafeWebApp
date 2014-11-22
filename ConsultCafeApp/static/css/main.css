@@ -113,12 +113,21 @@
 	border-radius: 0;
 }
 
+.submenuoption {
+	border-color: #bd582c;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	/*margin: 1px;*/
+	padding: 2px;
+}
+
 .submenubutton {
 	background: #e48312;
 	border: 1px solid black;
-	display: inline;
-	position: absolute;
-	right: 10px;
+}
+
+.submenulabel {
+	width: 75%;
 }
 
 .footerbarbutton {

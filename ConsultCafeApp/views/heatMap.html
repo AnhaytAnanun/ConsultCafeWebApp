@@ -1,9 +1,9 @@
-{% load staticfiles %}
+<!--{% load staticfiles %}-->
 
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href={% static "vendor/css/bootstrap.css" %}>
+		<!--<link rel="stylesheet" type="text/css" href={% static "vendor/css/bootstrap.css" %}>
 		<link rel="stylesheet" type="text/css" href={% static "css/main.css" %}>
 		<link href='http://fonts.googleapis.com/css?family=Ubuntu:400,500' rel='stylesheet' type='text/css'>
 		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=visualization,geometry"></script>
@@ -12,8 +12,9 @@
 		<script src={% static "js/resto.js" %}></script>
 		<script src={% static "js/heatmap.js" %}></script>
 		<script src={% static "js/mercator.js" %}></script>
-		<script src={% static "vendor/js/bootstrap.min.js" %}></script>
-		<!-- <link rel="stylesheet" type="text/css" href="../static/vendor/css/bootstrap.css">
+		<script src={% static "js/modal.js" %}></script>
+		<script src={% static "vendor/js/bootstrap.min.js" %}></script>-->
+		<link rel="stylesheet" type="text/css" href="../static/vendor/css/bootstrap.css">
 		<link rel="stylesheet" type="text/css" href="../static/css/main.css">
 		<link href='http://fonts.googleapis.com/css?family=Ubuntu:400,500' rel='stylesheet' type='text/css'>
 		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=visualization,geometry"></script>
@@ -22,7 +23,8 @@
 		<script src="../static/js/resto.js"></script>
 		<script src="../static/js/heatmap.js"></script>
 		<script src="../static/js/mercator.js"></script>
-		<script src="../static/vendor/js/bootstrap.min.js"></script> -->
+		<script src="../static/js/modal.js"></script>
+		<script src="../static/vendor/js/bootstrap.min.js"></script>
 		<script>
 			var map;
 			var heatMap;
@@ -35,6 +37,7 @@
 			google.maps.event.addDomListener(window, 'load', initialize);
 		</script>
 		<script>
+			var modal = new Modal();
 			function outputUpdate(rad) {
 				heatMap.setRadius(rad);
 				document.querySelector("#radiusdisplay").value = rad;
@@ -44,6 +47,12 @@
 			}
 			function closeSubmenu(menu) {
 				$(menu).find('.submenu').hide(300);
+			}
+			function setModalData(source) {
+				modal.openModal(source);
+			}
+			function submitModal() {
+				modal.submitModal();
 			}
 		</script>
 	</head>
@@ -55,13 +64,13 @@
 					<div onmouseleave="closeSubmenu(this)" onmouseenter="viewSubmenu(this)">
 						<button type="button" class="btn btn-primary sidebarbutton">Restaurants</button>
 						<div class="submenu">
-							<div>
-								<label>Type</label>
-								<button type="button" class="btn btn-primary submenubutton" data-toggle="modal" data-target="#menumodal">+</button>
+							<div class="submenuoption">
+								<label class="submenulabel" for="rest_type">Type</label>
+								<button type="button" class="btn btn-primary submenubutton" id="rest_type" data-toggle="modal" data-target="#menumodal" onclick="setModalData(this)">+</button>
 							</div>
-							<div>
-								<label>Kitchen</label>
-								<button type="button" class="submenubutton">+</button>
+							<div class="submenuoption">
+								<label class="submenulabel" for="rest_kitchen">Kitchen</label>
+								<button type="button" class="btn btn-primary submenubutton" id="rest_kitchen" data-toggle="modal" data-target="#menumodal" onclick="setModalData(this)">+</button>
 							</div>
 						</div>
 					</div>
@@ -84,6 +93,15 @@
 		<!-- Modals -->
 		<div class="modal fade" id="menumodal" tabindex="-1" role="dialog">
 			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-body" id="checkboxmodalcontent">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+						<button type="button" class="btn btn-primary" onclick="submitModal()">Submit</button>
+					</div>
+				</div>
+			</div>
 		</div>
 	</body>
 </html>
