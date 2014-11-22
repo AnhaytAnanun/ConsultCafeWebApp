@@ -25,6 +25,8 @@ class Person(models.Model):
 	age = models.IntegerField()
 	nationality = models.CharField(max_length=50)
 
+	token = models.CharField(max_length=32)
+
 	created = models.DateTimeField()
 	updated = models.DateTimeField()
 
