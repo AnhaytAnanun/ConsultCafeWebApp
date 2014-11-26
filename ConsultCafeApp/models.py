@@ -31,8 +31,20 @@ class Person(models.Model):
 	updated = models.DateTimeField()
 
 # PersonLocation, respresenting person location data
+# Uses rects for Damphster-Sheffer
 
 class PersonLocation(models.Model):
-	location = models.PointField()
+	location = models.PolygonField()
 
 	created = models.DateTimeField()
+
+# RentRect, representing rent at some location.
+# Uses rects for Damphster-Sheffer
+
+class RentRect(models.Model):
+	rect = models.IntegerField()
+
+	rent = models.PolygonField()	
+
+	created = models.DateTimeField()
+	updated = models.DateTimeField()

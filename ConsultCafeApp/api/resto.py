@@ -9,7 +9,6 @@ import logging
 logger = logging.getLogger("consultcafe")
 
 def plainRouter(request):
-	logger.debug(request.method)
 	if request.method == 'GET':
 		return query(request)
 	elif request.method == 'POST':
@@ -18,7 +17,6 @@ def plainRouter(request):
 		return HttpResponse(status=400)
 
 def idRouter(request, id):
-	logger.debug(str(id) + ' ' + request.method)
 	if request.method == 'PUT':
 		return edit(request, id)
 	elif request.method == 'DELETE':
