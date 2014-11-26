@@ -3,7 +3,6 @@ function HeatMap() {
 	var radius = 100;
 
 	this.generate = function(map) {
-		var resto = new Resto();
 		resto.query({}, function(data) {
 			var coords = [];
 

@@ -1,3 +1,8 @@
+function capitalizeFirstLetter(string)
+{
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 function Modal(){
 	var modalId;
 	var saved = false;
@@ -23,12 +28,12 @@ function Modal(){
 					for(var k = 0 ; k < curSubMenu.length ; k++)
 					{
 						if(curSubMenu[k].checked)
-							curList.append(curObjKeys[j] + ' ' + curSubMenu[k].name);
+							curList.push(capitalizeFirstLetter(curObjKeys[j]) + ': ' + capitalizeFirstLetter(curSubMenu[k].name));
 					}
 				}
 				for(var j = 0 ; j < curList.length ; j++)
 				{
-					appendables.append(dataKeys[i] + ' ' + curList[j]);
+					appendables.push(infoSample.replace(/TEXT/g, capitalizeFirstLetter(dataKeys[i]) + ' ' + curList[j]));
 				}
 			}
 			modalContent.append(appendables);
@@ -36,7 +41,10 @@ function Modal(){
 		}
 		saved = false;
 		modalId = source.id;
-		var data = modalData[modalId];
+		var hierarchy = modalId.split(':');
+		var category = hierarchy[0];
+		var subCategory = hierarchy[1];
+		var data = modalData[category][subCategory];
 		var checkboxes = [];
 		var modalContent = $('#checkboxmodalcontent');
 		modalContent.empty();
@@ -53,13 +61,20 @@ function Modal(){
 	
 	this.submitModal = function() {
 		saved = true;
-		var data = modalData[modalId];
+		var hierarchy = modalId.split(':');
+		var category = hierarchy[0];
+		var subCategory = hierarchy[1];
+		var data = modalData[category][subCategory];
 		var modalContent = $('#checkboxmodalcontent');
 		var checkboxes = modalContent.find('input');
 		
 		for (var  i = 0 ; i < checkboxes.length ; i++) {
 			data[i].checked = checkboxes[i].checked;
 		}
+
+		resto.query(modalData['restaurant'], function() {
+
+		});
 		
 		$('#menumodal').modal('hide');
 	}
@@ -98,4 +113,5 @@ function Modal(){
 	}
 	
 	var checkBoxSample = '<div><label style="padding: 8px;">LABEL</label><input type="checkbox" value="LABEL" CHECKED /></div>';
+	var infoSample = '<div><p>TEXT</p></div>'
 };

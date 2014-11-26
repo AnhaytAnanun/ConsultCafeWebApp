@@ -182,6 +182,7 @@
 	color: white;
 }
 
+
 .infobutton {
 	position: absolute;
 	border-radius: 10px;
@@ -196,6 +197,15 @@
 	font-weight: bold;
 	font-style: italic;
 	color: white;
+}
+
+.linkspan {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
 }
 
 body {

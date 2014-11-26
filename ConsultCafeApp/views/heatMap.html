@@ -27,11 +27,11 @@
 		<script src="../static/vendor/js/bootstrap.min.js"></script>
 		<script>
 			var map;
-			var heatMap;
+			var heatMap = new HeatMap();
+			var resto = new Resto();
 
 			function initialize() {
 				map = initMap('map-canvas');
-				heatMap = new HeatMap();
 				heatMap.generate(map);
 			};
 			google.maps.event.addDomListener(window, 'load', initialize);
@@ -66,11 +66,11 @@
 						<div class="submenu">
 							<div class="submenuoption">
 								<label class="submenulabel" for="rest_type">Type</label>
-								<button type="button" class="btn btn-primary submenubutton" id="rest_type" data-toggle="modal" data-target="#menumodal" onclick="setModalData(this)">+</button>
+								<button type="button" class="btn btn-primary submenubutton" id="restaurant:type" data-toggle="modal" data-target="#menumodal" onclick="setModalData(this)">+</button>
 							</div>
 							<div class="submenuoption">
 								<label class="submenulabel" for="rest_kitchen">Kitchen</label>
-								<button type="button" class="btn btn-primary submenubutton" id="rest_kitchen" data-toggle="modal" data-target="#menumodal" onclick="setModalData(this)">+</button>
+								<button type="button" class="btn btn-primary submenubutton" id="restaurant:kitchen" data-toggle="modal" data-target="#menumodal" onclick="setModalData(this)">+</button>
 							</div>
 						</div>
 					</div>
