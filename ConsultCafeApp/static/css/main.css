@@ -182,6 +182,22 @@
 	color: white;
 }
 
+.infobutton {
+	position: absolute;
+	border-radius: 10px;
+	width: 40px;
+	height: 40px;
+	z-index: 1;
+	right: 5px;
+	bottom: 15px;
+	background: #e48312;
+	font-size: 20px;
+	font-family: comic sans;
+	font-weight: bold;
+	font-style: italic;
+	color: white;
+}
+
 body {
 	width: 100%;
 	height: 100%;
