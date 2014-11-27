@@ -1,3 +1,8 @@
+function capitalizeFirstLetter(string)
+{
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 function Modal(){
 	var modalId;
 	var saved = false;
@@ -6,7 +11,34 @@ function Modal(){
 		if (saved && modalId === source.id) {
 			return;
 		}
-		
+		if(source.id === 'inforeq')
+		{
+			var appendables = [];
+			modalContent = $('#infomodalcontent');
+			modalContent.empty();
+			var dataKeys = Object.keys(modalData);
+			for(var i = 0 ; i < dataKeys.length ; i++)
+			{
+				var curList = [];
+				var curObj = modalData[dataKeys[i]];
+				var curObjKeys = Object.keys(curObj);
+				for(var j = 0 ; j < curObjKeys.length ; j++)
+				{
+					var curSubMenu = curObj[curObjKeys[j]];
+					for(var k = 0 ; k < curSubMenu.length ; k++)
+					{
+						if(curSubMenu[k].checked)
+							curList.push(capitalizeFirstLetter(curObjKeys[j]) + ': ' + capitalizeFirstLetter(curSubMenu[k].name));
+					}
+				}
+				for(var j = 0 ; j < curList.length ; j++)
+				{
+					appendables.push(infoSample.replace(/TEXT/g, capitalizeFirstLetter(dataKeys[i]) + ' ' + curList[j]));
+				}
+			}
+			modalContent.append(appendables);
+			return;
+		}
 		saved = false;
 		modalId = source.id;
 		var hierarchy = modalId.split(':');
@@ -81,4 +113,5 @@ function Modal(){
 	}
 	
 	var checkBoxSample = '<div><label style="padding: 8px;">LABEL</label><input type="checkbox" value="LABEL" CHECKED /></div>';
+	var infoSample = '<div><p>TEXT</p></div>'
 };
