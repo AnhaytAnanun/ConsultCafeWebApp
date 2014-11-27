@@ -38,10 +38,11 @@
 	opacity: .80;
 	color: white;
 	border-radius: 25px;
-	font-family: Ubuntu;
 	text-align: center;
-	font-size: 14px;
 	padding: 40px;
+	font-family: Ubuntu;
+	font-weight: 700;
+	font-size: 14px;
 }
 
 .upper-cell {
@@ -139,6 +140,8 @@
 	padding: 20px;
 	border-radius: 0px;
 	color: white;
+	font-family: Ubuntu;
+	font-weight: 700;
 }
 
 .footerbar {
@@ -197,6 +200,12 @@
 	font-weight: bold;
 	font-style: italic;
 	color: white;
+}
+
+.submitButton {
+	font-family: Ubuntu;
+	font-weight: 700;
+	color: #FFFFFF;
 }
 
 .linkspan {
