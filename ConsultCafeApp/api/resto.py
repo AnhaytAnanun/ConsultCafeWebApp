@@ -25,6 +25,7 @@ def idRouter(request, id):
 		return HttpResponse(status=400)
 
 def query(request):
+	logger.debug(request)
 	restos = serializers.serialize('json', Resto.objects.all())
 	return HttpResponse(restos, content_type='application/json', status=200)
 
