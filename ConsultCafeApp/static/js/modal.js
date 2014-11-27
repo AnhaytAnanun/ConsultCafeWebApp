@@ -19,21 +19,25 @@ function Modal(){
 			var dataKeys = Object.keys(modalData);
 			for(var i = 0 ; i < dataKeys.length ; i++)
 			{
-				var curList = [];
 				var curObj = modalData[dataKeys[i]];
 				var curObjKeys = Object.keys(curObj);
 				for(var j = 0 ; j < curObjKeys.length ; j++)
 				{
+					var curStr = '';
 					var curSubMenu = curObj[curObjKeys[j]];
 					for(var k = 0 ; k < curSubMenu.length ; k++)
 					{
 						if(curSubMenu[k].checked)
-							curList.push(capitalizeFirstLetter(curObjKeys[j]) + ': ' + capitalizeFirstLetter(curSubMenu[k].name));
+						{
+						    if(curStr.length > 0)
+								curStr += ', ';
+							curStr += capitalizeFirstLetter(curSubMenu[k].name);
+						}
 					}
-				}
-				for(var j = 0 ; j < curList.length ; j++)
-				{
-					appendables.push(infoSample.replace(/TEXT/g, capitalizeFirstLetter(dataKeys[i]) + ' ' + curList[j]));
+					if(curStr.length > 0)
+					{
+						appendables.push(infoSample.replace(/TEXT/g, capitalizeFirstLetter(dataKeys[i]) + ' ' + capitalizeFirstLetter(curObjKeys[j]) + ': ' + curStr));
+					}
 				}
 			}
 			modalContent.append(appendables);
