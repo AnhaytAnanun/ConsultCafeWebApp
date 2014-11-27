@@ -1,4 +1,5 @@
 from ConsultCafeApp.models import Resto
+from django.db.models import Q
 from django.http import HttpResponse
 from django.http import QueryDict
 from django.utils import timezone
@@ -25,7 +26,11 @@ def idRouter(request, id):
 		return HttpResponse(status=400)
 
 def query(request):
-	restos = serializers.serialize('json', Resto.objects.all())
+	types = request.GET.getlist('type[]', [])
+	kitchens = request.GET.getlist('kitchen[]', [])
+
+	restos = Resto.objects.filter(Q(type__in=types) & Q(kitchen__in=kitchens))
+	restos = serializers.serialize('json', restos)
 	return HttpResponse(restos, content_type='application/json', status=200)
 
 def add(request):

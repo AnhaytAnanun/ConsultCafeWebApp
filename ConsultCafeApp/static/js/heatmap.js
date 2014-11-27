@@ -3,7 +3,7 @@ function HeatMap() {
 	var radius = 100;
 
 	this.generate = function(map) {
-		resto.query({}, function(data) {
+		resto.query(generateRestoQuery(this.heatMapOptions['restaurant']), function(data) {
 			var coords = [];
 
 			for (var i = data.length - 1 ; i >= 0 ; i--) {
@@ -22,6 +22,23 @@ function HeatMap() {
              	});
           	});
           	heatmap.setMap(map);
+		});
+	}
+
+	this.reset = function() {
+		resto.query(generateRestoQuery(this.heatMapOptions['restaurant']), function(data) {
+			var coords = [];
+
+			for (var i = data.length - 1 ; i >= 0 ; i--) {
+				var latLng = extractLatLng(data[i].fields.location);
+				coords[i] = new google.maps.LatLng(latLng.lat, latLng.lng);
+			}
+
+				coords = new google.maps.MVCArray(coords);
+
+			heatmap.setOptions({
+				data: coords
+			});
 		});
 	}
 
@@ -60,4 +77,57 @@ function HeatMap() {
 
         return totalPixelSize;
     }
+
+    function generateRestoQuery(data) {
+    	var restoOptions = Object.keys(data);
+		var restoQuery = {};
+
+		for (var i = 0 ; i < restoOptions.length ; i++) {
+			restoQuery[restoOptions[i]] = [];
+			var subOptions = data[restoOptions[i]];
+
+			for (var j = 0 ; j < subOptions.length ; j++) {
+				var subOption = subOptions[j];
+
+				if (subOption.checked) {
+					restoQuery[restoOptions[i]].push(subOption.name);
+				}
+			}
+		}
+
+		return restoQuery;
+    }
+
+    this.heatMapOptions = {
+		restaurant: {
+			type: [
+				{
+					name: 'pub',
+					checked: true
+				},
+				{
+					name: 'restaurant',
+					checked: true
+				},
+				{
+					name: 'anticafe',
+					checked: true
+				}
+			],
+			kitchen: [
+				{
+					name: 'european',
+					checked: true
+				},
+				{
+					name: 'chinese',
+					checked: true
+				},
+				{
+					name: 'sweet',
+					checked: true
+				}
+			]
+		}
+	}
 }

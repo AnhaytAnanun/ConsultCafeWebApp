@@ -16,10 +16,10 @@ function Modal(){
 			var appendables = [];
 			modalContent = $('#infomodalcontent');
 			modalContent.empty();
-			var dataKeys = Object.keys(modalData);
+			var dataKeys = Object.keys(heatMap.heatMapOptions);
 			for(var i = 0 ; i < dataKeys.length ; i++)
 			{
-				var curObj = modalData[dataKeys[i]];
+				var curObj = heatMap.heatMapOptions[dataKeys[i]];
 				var curObjKeys = Object.keys(curObj);
 				for(var j = 0 ; j < curObjKeys.length ; j++)
 				{
@@ -48,7 +48,7 @@ function Modal(){
 		var hierarchy = modalId.split(':');
 		var category = hierarchy[0];
 		var subCategory = hierarchy[1];
-		var data = modalData[category][subCategory];
+		var data = heatMap.heatMapOptions[category][subCategory];
 		var checkboxes = [];
 		var modalContent = $('#checkboxmodalcontent');
 		modalContent.empty();
@@ -68,7 +68,7 @@ function Modal(){
 		var hierarchy = modalId.split(':');
 		var category = hierarchy[0];
 		var subCategory = hierarchy[1];
-		var data = modalData[category][subCategory];
+		var data = heatMap.heatMapOptions[category][subCategory];
 		var modalContent = $('#checkboxmodalcontent');
 		var checkboxes = modalContent.find('input');
 		
@@ -76,44 +76,9 @@ function Modal(){
 			data[i].checked = checkboxes[i].checked;
 		}
 
-		resto.query(modalData['restaurant'], function() {
-
-		});
+		heatMap.reset(data);
 		
 		$('#menumodal').modal('hide');
-	}
-	
-	var modalData = {
-		restaurant: {
-			type: [
-				{
-					name: 'pub',
-					checked: false
-				},
-				{
-					name: 'restaurant',
-					checked: false
-				},
-				{
-					name: 'anticafe',
-					checked: false
-				}
-			],
-			kitchen: [
-				{
-					name: 'european',
-					checked: false
-				},
-				{
-					name: 'chinese',
-					checked: false
-				},
-				{
-					name: 'sweet',
-					checked: false
-				}
-			]
-		}
 	}
 	
 	var checkBoxSample = '<div><label style="padding: 8px;">LABEL</label><input type="checkbox" value="LABEL" CHECKED /></div>';
