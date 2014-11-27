@@ -27,6 +27,7 @@
 		<script src="../static/vendor/js/bootstrap.min.js"></script>
 		<script>
 			var map;
+			var modal = new Modal();
 			var heatMap = new HeatMap();
 			var resto = new Resto();
 
@@ -37,7 +38,6 @@
 			google.maps.event.addDomListener(window, 'load', initialize);
 		</script>
 		<script>
-			var modal = new Modal();
 			function outputUpdate(rad) {
 				heatMap.setRadius(rad);
 				document.querySelector("#radiusdisplay").value = rad;
