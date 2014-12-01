@@ -71,6 +71,18 @@ function Modal(){
 		var data = heatMap.heatMapOptions[category][subCategory];
 		var modalContent = $('#checkboxmodalcontent');
 		var checkboxes = modalContent.find('input');
+		var areAllUnchecked = true;
+
+		for (var i = 0 ; i < checkboxes.length ; i++) {
+			if (checkboxes[i].checked) {
+				areAllUnchecked = false;
+			}
+		}
+
+		if (areAllUnchecked) {
+			alert('You must check at least one option!');
+			return;
+		}
 		
 		for (var  i = 0 ; i < checkboxes.length ; i++) {
 			data[i].checked = checkboxes[i].checked;
