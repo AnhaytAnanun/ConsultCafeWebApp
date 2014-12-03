@@ -29,6 +29,12 @@ def query(request):
 	types = request.GET.getlist('type[]', [])
 	kitchens = request.GET.getlist('kitchen[]', [])
 
+	if len(types) == 0 :
+		return HttpResponse(status=400)
+
+	if len(kitchens) == 0 :
+		return HttpResponse(status=400)
+
 	restos = Resto.objects.filter(Q(type__in=types) & Q(kitchen__in=kitchens))
 	restos = serializers.serialize('json', restos)
 	return HttpResponse(restos, content_type='application/json', status=200)
