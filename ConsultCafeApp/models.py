@@ -21,11 +21,24 @@ class Resto(models.Model):
 # Person, respresenting person personal data
 
 class Person(models.Model):
-	name = models.CharField(max_length=50)
+	username = models.CharField(max_length=50, primary_key=True, unique=True)
 	age = models.IntegerField()
+	sex = models.BooleanField()
+	busType = models.CharField(max_length=50)
+	kitchen = models.CharField(max_length=50)
 	nationality = models.CharField(max_length=50)
 
-	token = models.CharField(max_length=32)
+	token = models.CharField(max_length=32, unique=True)
+
+	created = models.DateTimeField()
+	updated = models.DateTimeField()
+
+# Business Type
+
+class Business(models.Model):
+	name = models.CharField(max_length=50, primary_key=True, unique=True)
+	wage = models.IntegerField()
+	income = models.IntegerField()
 
 	created = models.DateTimeField()
 	updated = models.DateTimeField()
@@ -34,6 +47,7 @@ class Person(models.Model):
 # Uses rects for Damphster-Sheffer
 
 class PersonLocation(models.Model):
+	username = models.CharField(max_length=50)
 	location = models.PolygonField()
 
 	created = models.DateTimeField()
