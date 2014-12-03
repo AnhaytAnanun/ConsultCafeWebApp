@@ -44,22 +44,6 @@
 				};
 			};
 			google.maps.event.addDomListener(window, 'load', initialize);
-			
-			function stopPolygon() {
-				drawingManager.setDrawingMode(null);
-			};
-			function clearAll() {
-				curPolygon.setMap(null);
-				curPolygon = null;
-			};
-			function startPolygon() {
-				drawingManager.setDrawingMode(google.maps.drawing.OverlayType.POLYGON);
-			};
-			function computeIt() {
-				if(curPolygon == null)
-					return;
-				var backendString = curPolygon.getPath().getArray().toString();
-			};
 		</script>
 	</head>
 	<body>
