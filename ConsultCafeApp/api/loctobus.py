@@ -20,13 +20,15 @@ def businessForLocation(request):
 	if len(polygonCoords) == 0 :
 		return HttpResponse(status=400)
 
+	logging.error(polygonCoords)
+
 	polygon = GEOSGeometry(polygonCoords)
 	polygon = polygon.convex_hull()
 
 	busenesses = Business.objects.all()
 
 	for buseness in busenesses :
-		people = Person.objects.filter(age__gte=minAge, age__lte=maxAge, sex__in=sex)
+		people = Person.objects.filter(age__gte=minAge, age__lte=maxAge, sex__in=sex, busType=busenesses['name'])
 		people = people.select_related()
 		people = people.annotate(score=Average(Dist('location', polygon)))
 		print(people)

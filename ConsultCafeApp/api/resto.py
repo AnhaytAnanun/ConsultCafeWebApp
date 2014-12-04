@@ -10,6 +10,7 @@ import logging
 logger = logging.getLogger("consultcafe")
 
 def plainRouter(request):
+	logger.error('Methods: ' + request.method)
 	if request.method == 'GET':
 		return query(request)
 	elif request.method == 'POST':

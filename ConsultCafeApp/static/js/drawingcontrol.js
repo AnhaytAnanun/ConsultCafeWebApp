@@ -25,6 +25,7 @@ function suggestMenu() {
 		return;
 	}
 	stopPolygon();
-	var backendString = curPolygon.getPath().getArray().toString();
+	var backendString = curPolygon.getPath().getArray();
+
 	//get suggestions from the server side and then append to the current modal
-}		
+}

@@ -16,7 +16,7 @@ function csrfSafeMethod(method) {
     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
 }
 
-var restosQueryUrl = 'http://localhost:8000/api/resto';
+var restosQueryUrl = 'http://localhost:8000/api/resto/';
 var restosEditUrl = 'http://localhost:8000/api/resto/:id'
 
 var table;
