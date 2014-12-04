@@ -2,6 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from ConsultCafeApp import views
 from ConsultCafeApp.api import resto
+from ConsultCafeApp.api import loctobus
 from ConsultCafeApp.adminPanel import restos
 
 urlpatterns = patterns('',
@@ -24,6 +25,8 @@ urlpatterns = patterns('',
 
     url(r'^api/resto/$', resto.plainRouter),
     url(r'^api/resto/(?P<id>[0-9]+)/$', resto.idRouter),
+
+    url(r'^api/loctobus', loctobus.businessForLocation),
 
     url(r'^admin/restos/$', restos.restos)
 )

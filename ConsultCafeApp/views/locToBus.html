@@ -58,7 +58,15 @@
 			function computeIt() {
 				if(curPolygon == null)
 					return;
-				var backendString = curPolygon.getPath().getArray().toString();
+				var backendString = 'POLYGON(' + curPolygon.getPath().getArray().toString() + ')';
+
+				$.get('http://localhost:8000/api/loctobus', {
+					polygon: backendString
+				}, function() {
+
+				}, function() {
+
+				});
 			};
 		</script>
 	</head>
