@@ -28,5 +28,7 @@ urlpatterns = patterns('',
 
     url(r'^api/loctobus', loctobus.businessForLocation),
 
-    url(r'^admin/restos/$', restos.restos)
+    url(r'^admin/restos/$', restos.restos),
+
+    url(r'^.*$', views.notFound)
 )

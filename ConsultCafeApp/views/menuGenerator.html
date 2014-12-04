@@ -1,20 +1,49 @@
-{% load staticfiles %}
+<!--{% load staticfiles %}-->
 
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href={% static "vendor/css/bootstrap.css" %}>
+		<!--<link rel="stylesheet" type="text/css" href={% static "vendor/css/bootstrap.css" %}>
 		<link rel="stylesheet" type="text/css" href={% static "css/main.css" %}>
 		<link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700' rel='stylesheet' type='text/css'>
-		<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=drawing"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script src={% static "js/map.js" %}></script>
-		<script src={% static "vendor/js/bootstrap.min.js" %}></script>
+		<script src={% static "js/drawingcontrol.js" %}></script>
+		<script src={% static "vendor/js/bootstrap.min.js" %}></script>-->
+		<link rel="stylesheet" type="text/css" href="../static/vendor/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="../static/css/main.css">
+		<link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700' rel='stylesheet' type='text/css'>
+		<script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=drawing"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="../static/js/map.js"></script>
+		<script src="../static/js/drawingcontrol.js"></script>
+		<script src="../static/vendor/js/bootstrap.min.js"></script>
 		<script>
-			window.onload = function() {
-				initMap('map-canvas');
+			var map;
+			var drawingManager;
+			var curPolygon;
+			function initialize() {
+				map = initMap('map-canvas');
+				drawingManager = new google.maps.drawing.DrawingManager({
+					drawingControl: false,
+					drawingMode: null
+				});
+				drawingManager.setMap(map);
+				
+				google.maps.event.addListener(drawingManager, 'polygoncomplete', polygonSetMap);
+				
+				function polygonSetMap(polygon) {
+					if(polygon.getPath().length < 3) {
+						polygon.setMap(null);
+						return;
+					}
+					if(curPolygon != null)
+						curPolygon.setMap(null);
+					curPolygon = polygon;
+				};
 			};
-		
+			google.maps.event.addDomListener(window, 'load', initialize);
 		</script>
 	</head>
 	<body>
@@ -29,14 +58,26 @@
 					<div id="map-canvas" class="fullscreen">
 					</div>
 					<div class="horseshit fullscreen">
-						<div class="menusuggestion">
-						</div>
+						<!--<div class="menusuggestion">
+						</div>-->
 						<div class="footerbar">
-						  <button type="button" class="btn btn-primary footerbarbutton leftmostbutton">Left</button>
-						  <button type="button" class="btn btn-primary footerbarbutton">Middle</button>
-						  <button type="button" class="btn btn-primary footerbarbutton">Right</button>
-						  <button type="button" class="btn btn-primary footerbarbutton">Right</button>
+						  <button type="button" class="btn btn-primary footerbarbutton leftmostbutton" onclick="clearAll()">clear</button>
+						  <button type="button" class="btn btn-primary footerbarbutton" onclick="startPolygon()">start</button>
+						  <button type="button" class="btn btn-primary footerbarbutton" onclick="stopPolygon()">stop</button>
+						  <button type="button" class="btn btn-primary footerbarbutton" data-toggle="modal" data-target="#menugenmodal" onclick="suggestMenu()">compute</button>
 						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Modals -->
+		<div class="modal fade" id="menugenmodal" tabindex="-1" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-body" id="checkboxmodalcontent">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary submitButton" data-dismiss="modal">Okay</button>
 					</div>
 				</div>
 			</div>

@@ -26,10 +26,9 @@ def businessForLocation(request):
 	busenesses = Business.objects.all()
 
 	for buseness in busenesses :
-		people = Person.objects
-			.filter(age__gte=minAge, age__lte=maxAge, sex__in=sex)
-			.select_related()
-			.annotate(score=Average(Dist('location', polygon)))
+		people = Person.objects.filter(age__gte=minAge, age__lte=maxAge, sex__in=sex)
+		people = people.select_related()
+		people = people.annotate(score=Average(Dist('location', polygon)))
 		print(people)
 
 	return HttpResponse(status=200)
