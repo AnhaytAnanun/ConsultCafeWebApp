@@ -19,3 +19,6 @@ def locToBus(request):
 
 def menuGenerator(request):
 	return render(request, 'menuGenerator.html')
+
+def notFound(request):
+	return render(request, 'notFound.html')

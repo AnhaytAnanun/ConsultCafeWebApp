@@ -4,7 +4,7 @@ from django.contrib.gis.db import models
 
 class Resto(models.Model):
 	name = models.CharField(max_length=50)
-	type = models.CharField(max_length=50)
+	type = models.ForeignKey('Business')
 	kitchen = models.CharField(max_length=50)
 	
 	location = models.PointField()
@@ -23,7 +23,7 @@ class Resto(models.Model):
 class Person(models.Model):
 	username = models.CharField(max_length=50, primary_key=True, unique=True)
 	age = models.IntegerField()
-	sex = models.BooleanField()
+	sex = models.IntegerField()
 	busType = models.CharField(max_length=50)
 	kitchen = models.CharField(max_length=50)
 	nationality = models.CharField(max_length=50)
@@ -47,7 +47,7 @@ class Business(models.Model):
 # Uses rects for Damphster-Sheffer
 
 class PersonLocation(models.Model):
-	username = models.CharField(max_length=50)
+	username = models.ForeignKey('Person')
 	location = models.PolygonField()
 
 	created = models.DateTimeField()
