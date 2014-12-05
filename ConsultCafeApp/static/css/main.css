@@ -112,6 +112,7 @@
 	background: #e48312;
 	border: none;
 	border-radius: 0;
+	clickable: 0;
 }
 
 .submenuoption {
