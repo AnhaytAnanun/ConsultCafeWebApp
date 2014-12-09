@@ -49,7 +49,7 @@ class Business(models.Model):
 
 class PersonLocation(models.Model):
 	username = models.CharField(max_length=50)
-	location = models.PolygonField()
+	location = models.PointField()
 
 	created = models.DateTimeField()
 

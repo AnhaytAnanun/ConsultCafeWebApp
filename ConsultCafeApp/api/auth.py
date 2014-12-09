@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
+from django.shortcuts import redirect
 import logging
 
 def signup(request):
@@ -9,7 +10,7 @@ def signup(request):
 
 	login(request, user)
 
-	return HttpResponse(status=200)
+	return redirect('/')
 
 def loginUser(request):
 	username = request.POST['username']
@@ -19,4 +20,4 @@ def loginUser(request):
 
 	if user is not None :
 		login(request, user)
-		return HttpResponse(status=200)
+		return redirect('/')

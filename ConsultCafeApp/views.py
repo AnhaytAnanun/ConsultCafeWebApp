@@ -11,7 +11,7 @@ def main(request):
 
 def login(request):
 	if request.user.is_authenticated():
-		return redirect('/mainMenu')
+		return redirect('/')
 	else:
 		return render(request, 'login.html')
 

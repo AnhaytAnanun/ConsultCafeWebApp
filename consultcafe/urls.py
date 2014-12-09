@@ -36,6 +36,7 @@ urlpatterns = patterns('',
 
     url(r'^api/person/$', person.plainRouter),
     url(r'^api/person/(?P<id>[a-z]+)/$', person.idRouter),
+    url(r'^api/personLocs/$', person.personLocs),
 
     url(r'^api/loctobus', loctobus.businessForLocation),
 
@@ -45,6 +46,8 @@ urlpatterns = patterns('',
     url(r'^admin/restos/$', restos.restos),
     url(r'^admin/business/$', businesses.business),
     url(r'^admin/people/$', people.people),
+
+    url(r'^ohMohMadadoh/', loctobus.ohMohMadadoh),
 
     url(r'^.*$', views.notFound)
 )
