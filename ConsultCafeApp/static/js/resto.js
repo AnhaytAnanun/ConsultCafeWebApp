@@ -8,3 +8,14 @@ function Resto() {
 		});
 	}
 }
+
+function PeopleLocs() {
+	var peopleQuery = 'http://localhost:8000/api/personLocs/';
+
+	this.query = function(queryData, callback) {
+		console.log(queryData);
+		$.get(peopleQuery, queryData, function(data) {
+			callback(data);
+		});
+	}
+}

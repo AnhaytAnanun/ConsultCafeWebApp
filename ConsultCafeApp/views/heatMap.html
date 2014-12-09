@@ -16,9 +16,11 @@
 		<script src={% static "vendor/js/bootstrap.min.js" %}></script>-->
 		<link rel="stylesheet" type="text/css" href="../static/vendor/css/bootstrap.css">
 		<link rel="stylesheet" type="text/css" href="../static/css/main.css">
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
 		<link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700' rel='stylesheet' type='text/css'>
 		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=visualization,geometry"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 		<script src="../static/js/map.js"></script>
 		<script src="../static/js/resto.js"></script>
 		<script src="../static/js/heatmap.js"></script>
@@ -30,10 +32,22 @@
 			var modal = new Modal();
 			var heatMap = new HeatMap();
 			var resto = new Resto();
+			var peoplelocs = new PeopleLocs();
 
 			function initialize() {
 				map = initMap('map-canvas');
 				heatMap.generate(map);
+
+				$( "#slider-range" ).slider({
+					range: true,
+					min: 10,
+					max: 100,
+					values: [ 18, 40 ],
+					slide: function( event, ui ) {
+					$( "#amount" ).val(ui.values[ 0 ] + " - " + ui.values[ 1 ]);
+					}
+				});
+				$( "#amount" ).val($( "#slider-range" ).slider( "values", 0 ) + " - " + $( "#slider-range" ).slider( "values", 1 ) );
 			};
 			google.maps.event.addDomListener(window, 'load', initialize);
 		</script>
@@ -61,6 +75,7 @@
 			<div class="row fullheight">
 				<div class="col-xs-2 fullheight sidebar">
 					<div style="height: 1px;"></div>
+					<h3><span class="label label-default" style="margin-left: 10px;">Objects</span></h3>
 					<div onmouseleave="closeSubmenu(this)" onmouseenter="viewSubmenu(this)">
 						<button type="button" class="btn btn-primary sidebarbutton">Restaurants</button>
 						<div class="submenu">
@@ -71,6 +86,25 @@
 							<div class="submenuoption">
 								<label class="submenulabel" for="rest_kitchen">Kitchen</label>
 								<button type="button" class="btn btn-primary submenubutton" id="restaurant:kitchen" data-toggle="modal" data-target="#menumodal" onclick="setModalData(this)">+</button>
+							</div>
+						</div>
+					</div>
+					<h3><span class="label label-default" style="margin-left: 10px;">People</span></h3>
+					<div class="thatDiv" onmouseleave="closeSubmenu(this)" onmouseenter="viewSubmenu(this)">
+						<button type="button" class="btn btn-primary sidebarbutton thatDiv">Age</button>						
+						<div class="submenu">
+							<div class="row submenuoption">
+								<input type="text" id="amount" readonly style="border:0; color:#333333; background: #e48312; width: 30%; float: left; font-weight: bold;" />
+								<div id="slider-range" style="width: 60%; float: left; margin-top: 5px; margin-right: 5px;"> </div>
+							</div>
+						</div>
+					</div>
+					<div class="thatDiv" onmouseleave="closeSubmenu(this)" onmouseenter="viewSubmenu(this)">
+						<button type="button" class="btn btn-primary sidebarbutton thatDiv">Sex</button>						
+						<div class="submenu">
+							<div class="row submenuoption">
+								<input type="text" id="amount" readonly style="border:0; color:#333333; background: #e48312; width: 30%; float: left; font-weight: bold;" />
+								<div id="slider-range" style="width: 60%; float: left; margin-top: 5px; margin-right: 5px;"> </div>
 							</div>
 						</div>
 					</div>

@@ -28,9 +28,12 @@ function computeIt() {
 	var backendString = makeBackendstring(curPolygon.getPath().getArray());
 
 	$.get('http://localhost:8000/api/loctobus', {
-		polygon: backendString
+		polygon: backendString,
+		minAge: $("#slider-range").slider( "values", 0),
+		maxAge: $("#slider-range").slider( "values", 1),
+		sex: [0, 1]
 	}, function(data) {
-
+		console.log(data);
 	});
 };
 

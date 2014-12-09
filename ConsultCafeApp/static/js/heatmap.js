@@ -1,6 +1,8 @@
 function HeatMap() {
 	var heatmap;
+	var peopleHeatMap;
 	var radius = 100;
+	var peopleRadius = 10;
 
 	this.generate = function(map) {
 		resto.query(generateRestoQuery(this.heatMapOptions['restaurant']), function(data) {
@@ -22,6 +24,45 @@ function HeatMap() {
              	});
           	});
           	heatmap.setMap(map);
+		});
+
+		peoplelocs.query(generatePeopleQuery(this.heatMapOptions['people']), function(data) {
+			var coords = [];
+
+			for (var i = data.length - 1 ; i >= 0 ; i--) {
+				var latLng = extractLatLng(data[i].fields.location);
+				coords[i] = new google.maps.LatLng(latLng.lat, latLng.lng);
+			}
+
+			var gradient = [
+			    'rgba(0, 255, 255, 0)',
+			    'rgba(0, 255, 255, 1)',
+			    'rgba(0, 191, 255, 1)',
+			    'rgba(0, 127, 255, 1)',
+			    'rgba(0, 63, 255, 1)',
+			    'rgba(0, 0, 255, 1)',
+			    'rgba(0, 0, 223, 1)',
+			    'rgba(0, 0, 191, 1)',
+			    'rgba(0, 0, 159, 1)',
+			    'rgba(0, 0, 127, 1)',
+			    'rgba(63, 0, 91, 1)',
+			    'rgba(127, 0, 63, 1)',
+			    'rgba(191, 0, 31, 1)',
+			    'rgba(255, 0, 0, 1)'
+		  	];
+
+			coords = new google.maps.MVCArray(coords);
+			peopleHeatMap = new google.maps.visualization.HeatmapLayer({
+				data: coords,
+				radius: getNewRadius(map, peopleRadius),
+				gradient: gradient
+			});
+			google.maps.event.addListener(map, 'zoom_changed', function () {
+             	peopleHeatMap.setOptions({
+             		radius: getNewRadius(map, peopleRadius)
+             	});
+          	});
+          	peopleHeatMap.setMap(map);
 		});
 	}
 
@@ -96,6 +137,10 @@ function HeatMap() {
 		}
 
 		return restoQuery;
+    }
+
+    function generatePeopleQuery(data) {
+    	return {};
     }
 
     this.heatMapOptions = {

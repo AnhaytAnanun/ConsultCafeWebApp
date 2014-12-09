@@ -1,4 +1,4 @@
-from ConsultCafeApp.models import Person
+from ConsultCafeApp.models import Person, PersonLocation
 from django.db.models import Q
 from django.http import HttpResponse
 from django.http import QueryDict
@@ -73,3 +73,6 @@ def remove(id):
 	Person.objects.filter(pk=id).delete()
 
 	return HttpResponse(status=200)
+
+def personLocs(request):
+	return HttpResponse(serializers.serialize('json', PersonLocation.objects.all()), content_type='application/json', status=200)
