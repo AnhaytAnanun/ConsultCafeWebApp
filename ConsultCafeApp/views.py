@@ -1,24 +1,46 @@
 from django.shortcuts import render
+from django.shortcuts import redirect
 
 # Create your views here.
 
 def main(request):
-	return render(request, 'mainMenu.html')
+	if request.user.is_authenticated():
+		return render(request, 'mainMenu.html')
+	else:
+		return redirect('/login')
 
 def login(request):
-	return render(request, 'login.html')
+	if request.user.is_authenticated():
+		return redirect('/mainMenu')
+	else:
+		return render(request, 'login.html')
 
 def busToLoc(request):
-	return render(request, 'busToLoc.html')
+	if request.user.is_authenticated():
+		return render(request, 'busToLoc.html')
+	else:
+		return redirect('/login')
 
 def heatMap(request):
-	return render(request, 'heatMap.html')
+	if request.user.is_authenticated():
+		return render(request, 'heatMap.html')
+	else:
+		return redirect('/login')
 
 def locToBus(request):
-	return render(request, 'locToBus.html')
+	if request.user.is_authenticated():
+		return render(request, 'locToBus.html')
+	else:
+		return redirect('/login')
 
 def menuGenerator(request):
-	return render(request, 'menuGenerator.html')
+	if request.user.is_authenticated():
+		return render(request, 'menuGenerator.html')
+	else:
+		return redirect('/login')
 
 def notFound(request):
-	return render(request, 'notFound.html')
+	if request.user.is_authenticated():
+		return render(request, 'notFound.html')
+	else:
+		return redirect('/login')

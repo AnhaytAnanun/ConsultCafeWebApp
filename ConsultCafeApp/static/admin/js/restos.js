@@ -17,12 +17,12 @@ function csrfSafeMethod(method) {
 }
 
 var restosQueryUrl = 'http://localhost:8000/api/resto/';
-var restosEditUrl = 'http://localhost:8000/api/resto/:id'
+var restosEditUrl = 'http://localhost:8000/api/resto/:id/';
 
 var table;
 
 function requestRestos() {
-	$.get(restosQueryUrl, {}, function(data) {
+	$.get(restosQueryUrl, allSelected, function(data) {
 		for (var i = 0 ; i < data.length ; i++) {
 			var entry = data[i]['fields'];
 			var id = data[i]['pk'];
@@ -76,8 +76,8 @@ function createRow(entry, id) {
 	cellArray.push($('<td>' + updated + '</td>').attr({id: 'updated_' + id}));
 
 	if (id !== 'new') {
-		cellArray.push($('<td><button onclick="saveChanges(' + id + ')">save</button></td>').attr({id: id}));
-		cellArray.push($('<td><button onclick="removeEntry(' + id + ')">remove</button></td>').attr({id: id}));
+		cellArray.push($('<td><button onclick="saveChanges(\'' + id + '\')">save</button></td>').attr({id: id}));
+		cellArray.push($('<td><button onclick="removeEntry(\'' + id + '\')">remove</button></td>').attr({id: id}));
 	} else {
 		cellArray.push($('<td><button onclick="saveNew()">create</button></td>'));
 	}
@@ -142,7 +142,7 @@ function saveNew() {
 	};
 
 	$.ajax({
-		url: restosQueryUrl + '/',
+		url: restosQueryUrl,
 		type: 'POST',
 		data: data,
 		success: function(data) {
@@ -155,3 +155,16 @@ function saveNew() {
 		}
 	});
 }
+
+var allSelected = {
+	type: [
+		'restaurant',
+		'pub',
+		'anticafe'
+	],
+	kitchen: [
+		'european',
+		'sweet',
+		'chinese'
+	]
+};

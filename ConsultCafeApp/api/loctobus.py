@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from django.http import QueryDict
 from django.utils import timezone
 from django.core import serializers
+from django.contrib.gis.geos import GEOSGeometry
 import json
 import logging
 
@@ -20,10 +21,13 @@ def businessForLocation(request):
 	if len(polygonCoords) == 0 :
 		return HttpResponse(status=400)
 
-	logging.error(polygonCoords)
+	mpolygon = GEOSGeometry(polygonCoords)
 
-	polygon = GEOSGeometry(polygonCoords)
-	polygon = polygon.convex_hull()
+	logging.error('WAS: ' + str(mpolygon))
+
+	mpolygon = mpolygon.convex_hull
+
+	logging.error('TURNS: ' + str(mpolygon))
 
 	busenesses = Business.objects.all()
 

@@ -11,10 +11,14 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(
+        migrations.AlterField(
+            model_name='personlocation',
+            name='username',
+            field=models.CharField(max_length=50),
+        ),
+        migrations.AlterField(
             model_name='resto',
-            name='kitchen',
-            field=models.CharField(default='Europe', max_length=50),
-            preserve_default=False,
+            name='type',
+            field=models.CharField(max_length=50),
         ),
     ]

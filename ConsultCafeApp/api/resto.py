@@ -1,4 +1,5 @@
 from ConsultCafeApp.models import Resto
+from ConsultCafeApp.models import Business
 from django.db.models import Q
 from django.http import HttpResponse
 from django.http import QueryDict
@@ -10,7 +11,6 @@ import logging
 logger = logging.getLogger("consultcafe")
 
 def plainRouter(request):
-	logger.error('Methods: ' + request.method)
 	if request.method == 'GET':
 		return query(request)
 	elif request.method == 'POST':

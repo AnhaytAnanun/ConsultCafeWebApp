@@ -1,10 +1,12 @@
 from django.contrib.gis.db import models
+from django.contrib.auth.models import UserManager
+from django.utils import timezone
 
 # Resto, respresenting restaurants
 
 class Resto(models.Model):
 	name = models.CharField(max_length=50)
-	type = models.ForeignKey('Business')
+	type = models.CharField(max_length=50)
 	kitchen = models.CharField(max_length=50)
 	
 	location = models.PointField()
@@ -26,7 +28,6 @@ class Person(models.Model):
 	sex = models.IntegerField()
 	busType = models.CharField(max_length=50)
 	kitchen = models.CharField(max_length=50)
-	nationality = models.CharField(max_length=50)
 
 	token = models.CharField(max_length=32, unique=True)
 
@@ -47,7 +48,7 @@ class Business(models.Model):
 # Uses rects for Damphster-Sheffer
 
 class PersonLocation(models.Model):
-	username = models.ForeignKey('Person')
+	username = models.CharField(max_length=50)
 	location = models.PolygonField()
 
 	created = models.DateTimeField()
