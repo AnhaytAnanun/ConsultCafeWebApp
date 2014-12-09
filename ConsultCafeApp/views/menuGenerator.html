@@ -44,6 +44,17 @@
 				};
 			};
 			google.maps.event.addDomListener(window, 'load', initialize);
+			function fadeItIn(footerbar) {
+				$(this).fadeTo(50, 1.0);
+			};
+			function fadeItOut(footerbar) {
+				$(this).fadeTo(50, 0.5);
+			};
+			$(function () {
+				tmp = $('.footerbar');
+				tmp.css('opacity', '0.5');
+				tmp.hover(fadeItIn, fadeItOut);
+			});
 		</script>
 	</head>
 	<body>
