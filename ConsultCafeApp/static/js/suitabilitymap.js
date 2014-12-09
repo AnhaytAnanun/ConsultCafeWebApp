@@ -32,7 +32,6 @@ function displaySuitabilityMap(map) {
 			squarePol.setMap(map);
 		};
 	};
-	//get scores from backend
 }
 function hideSuitabilityMap(map) {
 	for(var i = 0; i<googleRects.length; i++)
