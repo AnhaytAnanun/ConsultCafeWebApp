@@ -59,7 +59,7 @@
 			$(this).fadeTo(50, 1.0);
 		};
 		function fadeItOut(footerbar) {
-			$(this).fadeTo(50, 0.3);
+			$(this).fadeTo(50, 0.7);
 		};
 		$(function() {
 			$( "#age-slider" ).slider({
@@ -75,7 +75,6 @@
 						
 			$('.thatDiv').hover(viewSubmenus, closeSubmenus);
 			var tmp = $('.footerbar');
-			tmp.css('opacity', '0.3');
 			tmp.hover(fadeItIn, fadeItOut);
 		});
 		</script>

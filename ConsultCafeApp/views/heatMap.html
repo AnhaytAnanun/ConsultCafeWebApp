@@ -73,17 +73,15 @@
 				$(this).fadeTo(50, 1.0);
 			};
 			function fadeItOut(footerbar) {
-				$(this).fadeTo(50, 0.5);
+				$(this).fadeTo(50, 0.7);
 			};
 			function regenPeople() {
 				heatMap.regenPeople();
 			}
 			$(function () {
 				var tmp = $('.infobutton');
-				tmp.css('opacity', '0.5');
 				tmp.hover(fadeItIn, fadeItOut);
 				tmp = $('.heatmapmenu');
-				tmp.css('opacity', '0.5');
 				tmp.hover(fadeItIn, fadeItOut);
 			});
 		</script>
