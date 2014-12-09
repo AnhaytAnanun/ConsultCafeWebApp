@@ -84,14 +84,14 @@ def locationForBusiness(request):
 
 	logger.error(polygons)
 
-	people = Person.objects.filter(busType=business, kitchen=kitchen)
+	people = Person.objects.filter(Q(busType=business) | Q(kitchen=kitchen))
 	usernames = []
 
 	for person in people :
 		usernames.append(person.username)
 
 	locations = PersonLocation.objects.filter(username__in=usernames)
-	restos = Resto.objects.filter(type=business, kitchen=kitchen)
+	restos = Resto.objects.filter(Q(type=business) | Q(kitchen=kitchen))
 
 	scores = []
 
@@ -101,17 +101,19 @@ def locationForBusiness(request):
 		locScore = 0
 		busScore = 0
 
-		for loc in locations :
-			locScore = locScore + loc.location.distance(rect)
+		if len(locations) > 0 :
+			for loc in locations :
+				locScore = locScore + 1 / (1 + loc.location.distance(rect))
 
-		locScore = locScore / len(locations)
+			locScore = locScore / len(locations)
 
-		for resto in restos :
-			busScore = busScore + resto.location.distance(rect)
+		if len(restos) > 0 :
+			for resto in restos :
+				busScore = busScore + resto.location.distance(rect) / 10
 
-		busScore = busScore / len(restos)
+			busScore = busScore / len(restos)
 
-		score = 10 / locScore - busScore / 10
+		score = locScore - busScore
 
 		if score < 0 :
 			score = 0
