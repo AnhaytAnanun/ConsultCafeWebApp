@@ -43,10 +43,10 @@
 				document.querySelector("#radiusdisplay").value = rad;
 			};
 			function viewSubmenu(menu) {
-				$(menu).find('.submenu').show(300);
+				$(menu).find('.submenu').stop(true).slideDown(150);
 			}
 			function closeSubmenu(menu) {
-				$(menu).find('.submenu').hide(300);
+				$(menu).find('.submenu').stop(true).slideUp(150);
 			}
 			function setModalData(source) {
 				modal.openModal(source);
