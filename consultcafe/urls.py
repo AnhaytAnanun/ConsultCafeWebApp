@@ -39,6 +39,7 @@ urlpatterns = patterns('',
     url(r'^api/personLocs/$', person.personLocs),
 
     url(r'^api/loctobus', loctobus.businessForLocation),
+    url(r'^api/bustoloc', loctobus.locationForBusiness),
 
     url(r'^api/login/$', auth.loginUser),
     url(r'^api/signup/$', auth.signup),

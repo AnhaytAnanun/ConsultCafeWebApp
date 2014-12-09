@@ -76,6 +76,50 @@ def businessForLocation(request):
 
 	return HttpResponse(json.dumps(data), content_type='application/json', status=200)
 
+def locationForBusiness(request):
+	business = request.GET['business']
+	kitchen = request.GET['kitchen']
+	polygons = request.GET.getlist('polygons[]', [])
+	data = []
+
+	logger.error(polygons)
+
+	people = Person.objects.filter(busType=business, kitchen=kitchen)
+	usernames = []
+
+	for person in people :
+		usernames.append(person.username)
+
+	locations = PersonLocation.objects.filter(username__in=usernames)
+	restos = Resto.objects.filter(type=business, kitchen=kitchen)
+
+	scores = []
+
+	for polygon in polygons :
+		rect = GEOSGeometry(polygon)
+		
+		locScore = 0
+		busScore = 0
+
+		for loc in locations :
+			locScore = locScore + loc.location.distance(rect)
+
+		locScore = locScore / len(locations)
+
+		for resto in restos :
+			busScore = busScore + resto.location.distance(rect)
+
+		busScore = busScore / len(restos)
+
+		score = 10 / locScore - busScore / 10
+
+		if score < 0 :
+			score = 0
+
+		scores.append(score)
+
+	return HttpResponse(json.dumps(scores), content_type='application/json', status=200)
+
 def ohMohMadadoh(request):
 	PersonLocation.objects.all().delete()
 
