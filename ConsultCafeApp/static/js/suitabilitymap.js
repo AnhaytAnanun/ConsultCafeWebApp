@@ -12,6 +12,8 @@ function displaySuitabilityMap(map) {
 	var starty = bounds.getNorthEast().lat();
 	var stepy= (bounds.getSouthWest().lat() - starty)/res;
 	
+	var rects = [];
+	
 	for(var i=0;i<res;i++){
 		for(var j=0;j<res;j++){
 			var rect = [
@@ -21,18 +23,26 @@ function displaySuitabilityMap(map) {
 				new google.maps.LatLng(starty + stepy*(i+1), startx+j*stepx ),
 				new google.maps.LatLng(starty + stepy*i, startx+j*stepx)
 			];
+			rects.push(rect);
+		};
+	};
+	//get scores from backend
+	var maxscore = Math.max.apply(Math, scores);
+	var k=0;
+	for(var i=0; i<res; i++){
+		for(var j=0; j<res; j++, k++)
+		{
 			var squarePol = new google.maps.Polygon({
-				paths: rect,
+				paths: rects[k],
 				strokeOpacity: 0,
 				strokeWeight: 1,
-				fillColor: 'rgb(242,78,67)',
+				fillColor: 'rgb(213,63,53)',
 				fillOpacity: (0.7 * Math.random() )
 			});
 			googleRects.push(squarePol);
 			squarePol.setMap(map);
-		};
-	};
-	//get scores from backend
+		}
+	}
 }
 function hideSuitabilityMap(map) {
 	for(var i = 0; i<googleRects.length; i++)
