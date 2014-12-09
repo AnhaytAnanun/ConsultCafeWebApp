@@ -133,16 +133,17 @@
 }
 
 .footerbarbutton {
-	width: 24%;
+	width: 25%;
 	right: 0;
 	margin-right: 0;
 	background: #e48312;
 	border: none;
-	padding: 20px;
+	height: 60px;
 	border-radius: 0px;
 	color: white;
 	font-family: Ubuntu;
 	font-weight: 700;
+	float: left;
 }
 
 .footerbar {
@@ -153,7 +154,7 @@
 	bottom: 0%;
 	border: 0;
 	height: auto;
-	width: 30%;
+	width: 320px;
 	border-top-left-radius: 15px;
 }
 
@@ -173,7 +174,7 @@
 
 .heatmapmenu {
 	position: absolute;
-	top: 5px;
+	top: 24px;
 	right: 5px;
 	padding: 10px;
 	width: auto;

@@ -1,4 +1,4 @@
-{% load staticfiles %}
+<!--{% load staticfiles %}-->
 
 <!DOCTYPE html>
 <html>
@@ -16,12 +16,48 @@
 		<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script src="../static/js/map.js"></script>
+		<script src="../static/js/suitabilitymap.js"></script>
 		<script src="../static/vendor/js/bootstrap.min.js"></script>
 		<script>
+			var map;
 			window.onload = function() {
-				initMap('map-canvas');
+				map = initMap('map-canvas');
 			};
-		
+			function computeIt() {
+				map.setOptions({draggable: false,
+								scrollwheel: false,
+								navigationControl: false,
+								zoomControl: false,
+								panControl: false,
+								rotateControl: false,
+								keyboardShortcuts: false,
+								disableDoubleClickZoom: true
+								});
+				displaySuitabilityMap(map);
+			};
+			function resetIt() {
+				hideSuitabilityMap(map);
+				map.setOptions({draggable: true,
+								scrollwheel: true,
+								navigationControl: true,
+								zoomControl: true,
+								panControl: true,
+								rotateControl: true,
+								keyboardShortcuts: true,
+								disableDoubleClickZoom: false
+								});
+			};
+			function fadeItIn(footerbar) {
+				$(this).fadeTo(50, 1.0);
+			};
+			function fadeItOut(footerbar) {
+				$(this).fadeTo(50, 0.5);
+			};
+			$(function () {
+				tmp = $('.footerbar');
+				tmp.css('opacity', '0.5');
+				tmp.hover(fadeItIn, fadeItOut);
+			});
 		</script>
 	</head>
 	<body>
@@ -34,6 +70,12 @@
 				</div>
 				<div class="col-xs-10 fullheight">
 					<div id="map-canvas" class="fullscreen">
+					</div>
+					<div class="horseshit fullscreen">
+						<div class="footerbar" style="width: 180px">
+						  <button type="button" class="btn btn-primary footerbarbutton leftmostbutton" style="width: 50%" onclick="computeIt()">compute</button>
+						  <button type="button" class="btn btn-primary footerbarbutton" style="width: 50%" onclick="resetIt()">reset</button>
+						</div>
 					</div>
 				</div>
 			</div>
