@@ -1,8 +1,8 @@
 var googleRects = [];
 var scores = [];
 var myStruct = {
-	type: '',
-	kitchen: ''
+	type: 'pub',
+	kitchen: 'european'
 	};
 
 function displaySuitabilityMap(map) {
