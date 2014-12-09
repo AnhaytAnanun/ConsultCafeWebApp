@@ -17,7 +17,7 @@ def businessForLocation(request):
 	polygonCoords = request.GET['polygon']
 	minAge = request.GET['minAge']
 	maxAge = request.GET['maxAge']
-	sex = request.GET['sex[]']
+	sex = request.GET.getlist('sex[]', [])
 
 	if len(polygonCoords) == 0 :
 		return HttpResponse(status=400)

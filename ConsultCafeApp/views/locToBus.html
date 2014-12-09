@@ -72,19 +72,7 @@
 				}
 			});
 			$( "#agediv" ).val($( "#age-slider" ).slider( "values", 0 ) + " - " + $( "#age-slider" ).slider( "values", 1 ) );
-			
-			$( "#wage-slider" ).slider({
-				range: true,
-				min: 50,
-				max: 500,
-				values: [ 100, 200 ],
-				step: 10,
-				slide: function( event, ui ) {
-				$( "#wagediv" ).val(ui.values[ 0 ] + "k - " + ui.values[ 1 ] + "k");
-				}
-			});
-			$( "#wagediv" ).val($( "#wage-slider" ).slider( "values", 0 ) + "k - " + $( "#wage-slider" ).slider( "values", 1 ) + "k");
-			
+						
 			$('.thatDiv').hover(viewSubmenus, closeSubmenus);
 			var tmp = $('.footerbar');
 			tmp.css('opacity', '0.3');
@@ -113,15 +101,6 @@
 									<input type="checkbox" id="ismale" style="border:0; width: 20%; float: left;" checked>
 									<label class="submenulabel" style=" float:left; margin-left: 20px; width: auto">Female</label>
 									<input type="checkbox" id="isfemale" style="border:0; width: 20%; float: left;" checked>
-								</div>
-							</div>
-						</div>
-						<div class="thatDiv">
-							<button type="button" class="btn btn-primary sidebarbutton thatDiv">Wage</button>
-							<div class="submenu">
-								<div class="row submenuoption">
-									<input type="text" id="wagediv" readonly style="border:0; color:#333333; background: #e48312; width: 40%; float: left; font-weight: bold;">
-									<div id="wage-slider" style="width: 50%; float: left; margin-top: 5px; margin-right: 5px;"> </div>
 								</div>
 							</div>
 						</div>

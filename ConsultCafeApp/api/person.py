@@ -75,4 +75,16 @@ def remove(id):
 	return HttpResponse(status=200)
 
 def personLocs(request):
-	return HttpResponse(serializers.serialize('json', PersonLocation.objects.all()), content_type='application/json', status=200)
+	minAge = request.GET['minAge']
+	maxAge = request.GET['maxAge']
+	sex = request.GET.getlist('sex[]', [])
+
+	logger.error(sex)
+
+	people = Person.objects.filter(age__gte=minAge, age__lte=maxAge, sex__in=sex)
+	usernames = []
+
+	for person in people :
+		usernames.append(person.username)
+
+	return HttpResponse(serializers.serialize('json', PersonLocation.objects.filter(username__in=usernames)), content_type='application/json', status=200)

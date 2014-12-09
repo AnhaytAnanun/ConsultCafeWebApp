@@ -83,6 +83,23 @@ function HeatMap() {
 		});
 	}
 
+	this.regenPeople = function() {
+    	peoplelocs.query(generatePeopleQuery(this.heatMapOptions['restaurant']), function(data) {
+			var coords = [];
+
+			for (var i = data.length - 1 ; i >= 0 ; i--) {
+				var latLng = extractLatLng(data[i].fields.location);
+				coords[i] = new google.maps.LatLng(latLng.lat, latLng.lng);
+			}
+
+				coords = new google.maps.MVCArray(coords);
+
+			peopleHeatMap.setOptions({
+				data: coords
+			});
+		});
+    }
+
 	this.setRadius = function(rad) {
 		radius = rad;
 		heatmap.setOptions({
@@ -140,7 +157,20 @@ function HeatMap() {
     }
 
     function generatePeopleQuery(data) {
-    	return {};
+    	var sex = [];
+
+		if ($('#isfemale')[0].checked) {
+			sex.push(0);
+		}
+		if ($('#ismale')[0].checked) {
+			sex.push(1);
+		}
+
+		return {
+			minAge: $("#age-slider").slider( "values", 0),
+			maxAge: $("#age-slider").slider( "values", 1),
+			sex: sex
+		};
     }
 
     this.heatMapOptions = {
