@@ -16,13 +16,29 @@
 		<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script src="../static/js/map.js"></script>
+		<script src="../static/js/heatmap.js"></script>
+		<script src="../static/js/modal.js"></script>
 		<script src="../static/js/suitabilitymap.js"></script>
 		<script src="../static/vendor/js/bootstrap.min.js"></script>
 		<script>
 			var map;
+			var notSoHeatMap = new HeatMap();
+			var modal = new Modal();
 			window.onload = function() {
 				map = initMap('map-canvas');
 			};
+			function viewSubmenu(menu) {
+				$(menu).find('.submenu').stop(true).slideDown(150);
+			}
+			function closeSubmenu(menu) {
+				$(menu).find('.submenu').stop(true).slideUp(150);
+			}
+			function setModalData(source) {
+				modal.openModal(source);
+			}
+			function submitModal() {
+				modal.submitModal();
+			}
 			function computeIt() {
 				map.setOptions({draggable: false,
 								scrollwheel: false,
@@ -63,9 +79,22 @@
 		<div class="container fullscreen">
 			<div class="row fullheight">
 				<div class="col-xs-2 fullheight sidebar">
-				  <button type="button" class="btn btn-primary sidebarbutton">Left</button>
-				  <button type="button" class="btn btn-primary sidebarbutton">Middle</button>
-				  <button type="button" class="btn btn-primary sidebarbutton">Right</button>
+					<div onmouseleave="closeSubmenu(this)" onmouseenter="viewSubmenu(this)">
+						<button type="button" class="btn btn-primary sidebarbutton">Restaurants</button>
+						<div class="submenu">
+							<div class="submenuoption">
+								<label class="submenulabel" for="rest_type">Type</label>
+								<button type="button" class="btn btn-primary submenubutton" id="restaurant:type" data-toggle="modal" data-target="#menumodal" onclick="setModalData(this)">+</button>
+							</div>
+							<div class="submenuoption">
+								<label class="submenulabel" for="rest_kitchen">Kitchen</label>
+								<button type="button" class="btn btn-primary submenubutton" id="restaurant:kitchen" data-toggle="modal" data-target="#menumodal" onclick="setModalData(this)">+</button>
+							</div>
+						</div>
+					</div>
+					<button type="button" class="btn btn-primary sidebarbutton">Left</button>
+					<button type="button" class="btn btn-primary sidebarbutton">Middle</button>
+					<button type="button" class="btn btn-primary sidebarbutton">Right</button>
 				</div>
 				<div class="col-xs-10 fullheight">
 					<div id="map-canvas" class="fullscreen">
@@ -75,6 +104,19 @@
 						  <button type="button" class="btn btn-primary footerbarbutton leftmostbutton" style="width: 50%" onclick="computeIt()">compute</button>
 						  <button type="button" class="btn btn-primary footerbarbutton" style="width: 50%" onclick="resetIt()">reset</button>
 						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Modals -->
+		<div class="modal fade" id="menumodal" tabindex="-1" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-body" id="radiomodalcontent">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary submitButton" data-dismiss="modal">Cancel</button>
+						<button type="button" class="btn btn-primary submitButton" onclick="submitModal()">Submit</button>
 					</div>
 				</div>
 			</div>

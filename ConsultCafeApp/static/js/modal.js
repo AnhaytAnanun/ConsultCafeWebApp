@@ -47,19 +47,43 @@ function Modal(){
 		var hierarchy = modalId.split(':');
 		var category = hierarchy[0];
 		var subCategory = hierarchy[1];
-		var data = heatMap.heatMapOptions[category][subCategory];
-		var checkboxes = [];
-		var modalContent = $('#checkboxmodalcontent');
-		modalContent.empty();
-		
-		for (var i = 0 ; i < data.length ; i++) {
-			var checkbox = checkBoxSample.replace(/LABEL/g, data[i].name);
-			var isChecked = data[i].checked ? 'checked="true"' : ' ';
-			checkbox = checkbox.replace(/CHECKED/g, isChecked);
-			checkboxes.push($(checkbox));
+		var data;
+		try {
+			data = heatMap.heatMapOptions[category][subCategory];
+			var checkboxes = [];
+			var modalContent = $('#checkboxmodalcontent');
+			modalContent.empty();
+			
+			for (var i = 0 ; i < data.length ; i++) {
+				var checkbox = checkBoxSample.replace(/LABEL/g, data[i].name);
+				var isChecked = data[i].checked ? 'checked="true"' : ' ';
+				checkbox = checkbox.replace(/CHECKED/g, isChecked);
+				checkboxes.push($(checkbox));
+			}
+			
+			modalContent.append(checkboxes);
 		}
-		
-		modalContent.append(checkboxes);
+		catch (err){
+			data = notSoHeatMap.heatMapOptions[category][subCategory];
+			var radios = [];
+			var modalContent = $('#radiomodalcontent');
+			modalContent.empty();
+			
+			var cnt = 0;
+			for (var i = 0 ; i < data.length ; i++) {
+				if(data[i].checked) {
+					if(cnt > 0)
+						data[i].checked = 0;
+					else
+						cnt++;
+				}
+			}
+			for (var i = 0 ; i < data.length ; i++) {
+				var isChecked = data[i].checked ? ' checked ' : ' ';
+				var radio = $('<div><label style="padding: 8px;">'+data[i].name+'</label>' + '<input type="radio" name="myForm"' + isChecked + '/></div>');
+				radio.appendTo(modalContent);
+			}
+		}
 	}
 	
 	this.submitModal = function() {
@@ -67,28 +91,52 @@ function Modal(){
 		var hierarchy = modalId.split(':');
 		var category = hierarchy[0];
 		var subCategory = hierarchy[1];
-		var data = heatMap.heatMapOptions[category][subCategory];
-		var modalContent = $('#checkboxmodalcontent');
-		var checkboxes = modalContent.find('input');
-		var areAllUnchecked = true;
+		try {
+			var data = heatMap.heatMapOptions[category][subCategory];
+			var modalContent = $('#checkboxmodalcontent');
+			var checkboxes = modalContent.find('input');
+			var areAllUnchecked = true;
 
-		for (var i = 0 ; i < checkboxes.length ; i++) {
-			if (checkboxes[i].checked) {
-				areAllUnchecked = false;
+			for (var i = 0 ; i < checkboxes.length ; i++) {
+				if (checkboxes[i].checked) {
+					areAllUnchecked = false;
+				}
 			}
-		}
 
-		if (areAllUnchecked) {
-			alert('You must check at least one option!');
-			return;
-		}
-		
-		for (var  i = 0 ; i < checkboxes.length ; i++) {
-			data[i].checked = checkboxes[i].checked;
-		}
+			if (areAllUnchecked) {
+				alert('You must check at least one option!');
+				return;
+			}
+			
+			for (var  i = 0 ; i < checkboxes.length ; i++) {
+				data[i].checked = checkboxes[i].checked;
+			}
 
-		heatMap.reset(data);
-		
+			heatMap.reset(data);
+		}
+		catch (err) {
+			var data = notSoHeatMap.heatMapOptions[category][subCategory];
+			var modalContent = $('#radiomodalcontent');
+			var radios = modalContent.find('input');
+			var areAllUnchecked = true;
+
+			for (var i = 0 ; i < radios.length ; i++) {
+				if (radios[i].checked) {
+					areAllUnchecked = false;
+					myStruct[subCategory]=data[i].name;
+				}
+			}
+
+			if (areAllUnchecked) {
+				alert('You must check at least one option!');
+				return;
+			}
+			
+			for (var  i = 0 ; i < radios.length ; i++) {
+				data[i].checked = radios[i].checked;
+			}
+			//notSoHeatMap.reset(data);
+		}
 		$('#menumodal').modal('hide');
 	}
 	this.setModalContent = function (source, data) {
@@ -97,5 +145,6 @@ function Modal(){
 		}
 	};
 	var checkBoxSample = '<div><label style="padding: 8px;">LABEL</label><input type="checkbox" value="LABEL" CHECKED /></div>';
+	var radioSample = '<div><label style="padding: 8px;">LABEL</label><input type="radio" value="LABEL" CHECKED /></div>'
 	var infoSample = '<div><p>TEXT</p></div>'
 };
