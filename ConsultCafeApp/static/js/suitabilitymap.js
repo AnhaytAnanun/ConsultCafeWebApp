@@ -1,5 +1,9 @@
 var googleRects = [];
 var scores = [];
+var myStruct = {
+	type: '',
+	kitchen: ''
+	};
 
 function displaySuitabilityMap(map) {
 	if(googleRects.length > 0)
@@ -36,8 +40,8 @@ function displaySuitabilityMap(map) {
 
 	$.get('http://localhost:8000/api/bustoloc', {
 		polygons: polygons,
-		business: 'pub',
-		kitchen: 'european'
+		business: myStruct['type'],
+		kitchen: myStruct['kitchen']
 	}, function(scores) {
 		var maxscore = Math.max.apply(Math, scores);
 		var k=0;
