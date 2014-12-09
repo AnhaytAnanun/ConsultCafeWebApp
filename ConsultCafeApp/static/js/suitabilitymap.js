@@ -36,7 +36,7 @@ function displaySuitabilityMap(map) {
 				paths: rects[k],
 				strokeOpacity: 0,
 				strokeWeight: 1,
-				fillColor: 'rgb(213,63,53)',
+				fillColor: 'rgb(244,69,57)',
 				fillOpacity: (0.7 * Math.random() )
 			});
 			googleRects.push(squarePol);
