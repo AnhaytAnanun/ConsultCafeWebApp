@@ -1,5 +1,4 @@
-function capitalizeFirstLetter(string)
-{
+function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
@@ -92,7 +91,11 @@ function Modal(){
 		
 		$('#menumodal').modal('hide');
 	}
-	
+	this.setModalContent = function (source, data) {
+		var curScores = JSON.parse(data);
+		for(var key in curScores) {
+		}
+	};
 	var checkBoxSample = '<div><label style="padding: 8px;">LABEL</label><input type="checkbox" value="LABEL" CHECKED /></div>';
 	var infoSample = '<div><p>TEXT</p></div>'
 };

@@ -21,10 +21,10 @@ function makeBackendstring(pointsArray) {
 	return backendString;
 }
 
-function computeIt() {
+function computeIt(modalId) {
+	stopPolygon();
 	if(curPolygon == null)
 		return;
-	stopPolygon();
 	var backendString = makeBackendstring(curPolygon.getPath().getArray());
 	var sex = [];
 
@@ -34,15 +34,17 @@ function computeIt() {
 	if ($('#ismale')[0].checked) {
 		sex.push(1);
 	}
-
+	
 	$.get('http://localhost:8000/api/loctobus', {
 		polygon: backendString,
 		minAge: $("#age-slider").slider( "values", 0),
 		maxAge: $("#age-slider").slider( "values", 1),
 		sex: sex
 	}, function(data) {
-		console.log(data);
+		modal.setModalContent(this, data);
+		$(modalId).modal('show');
 	});
+	
 };
 
 function suggestMenu() {

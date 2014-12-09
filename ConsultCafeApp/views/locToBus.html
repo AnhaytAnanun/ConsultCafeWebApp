@@ -19,10 +19,12 @@
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 		<script src="../static/js/map.js"></script>
+		<script src="../static/js/modal.js"></script>
 		<script src="../static/js/drawingcontrol.js"></script>
 		<script src="../static/vendor/js/bootstrap.min.js"></script>
 		<script>
 			var map;
+			var modal = new Modal();
 			var drawingManager;
 			var curPolygon;
 			function initialize() {
@@ -45,6 +47,12 @@
 					curPolygon = polygon;
 				};
 			};
+			
+			function computeItFirstStep() {
+				var scoresJSON = computeIt();
+				
+			};
+			
 			google.maps.event.addDomListener(window, 'load', initialize);
 		</script>
 		<script>
@@ -112,8 +120,23 @@
 						  <button type="button" class="btn btn-primary footerbarbutton leftmostbutton" onclick="clearAll()">clear</button>
 						  <button type="button" class="btn btn-primary footerbarbutton" onclick="startPolygon()">start</button>
 						  <button type="button" class="btn btn-primary footerbarbutton" onclick="stopPolygon()">stop</button>
-						  <button type="button" class="btn btn-primary footerbarbutton" onclick="computeIt()">compute</button>
+						  <button type="button" class="btn btn-primary footerbarbutton" onclick="computeIt(bizsugmodal)">compute</button>
 						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Modal -->
+		<div class="modal fade" id="bizsugmodal" tabindex="-1" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						Scores for Different Criteria
+					</div>
+					<div class="modal-body" id="infomodalcontent">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary submitButton" data-dismiss="modal">Okay</button>
 					</div>
 				</div>
 			</div>
