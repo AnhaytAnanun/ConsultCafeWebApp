@@ -91,11 +91,56 @@ function Modal(){
 		
 		$('#menumodal').modal('hide');
 	}
-	this.setModalContent = function (source, data) {
-		var curScores = JSON.parse(data);
-		for(var key in curScores) {
+
+	this.setModalContent = function (data) {
+		var names = [];
+		var vals = [[], [], [], []];
+		var subkeys = [];
+
+		for (var key in data) {
+			names.push(key);
+			
+			var i = 0;
+
+			subkeys = [];
+
+			for (var subkey in data[key]) {
+				vals[i].push(data[key][subkey]);
+				subkeys.push(subkey);
+				i++;
+			}
+		}
+
+		for (var i = 0 ; i < vals.length ; i = i + 3) {
+			var max = Math.max.apply(Math, vals[i]);
+
+			for (var j = 0 ; j < vals[i].length ; j++) {
+				vals[i][j] = vals[i][j] / max * 100
+			}
+		}
+
+		for (var i = 0 ; i < subkeys.length ; i++) {
+			subkey = subkeys[i];
+
+			var chart = {
+			    labels: names,
+			    datasets: [
+			        {
+			            label: subkey,
+			            fillColor: "rgba(220,220,220,0.5)",
+			            strokeColor: "rgba(220,220,220,0.8)",
+			            highlightFill: "rgba(220,220,220,0.75)",
+			            highlightStroke: "rgba(220,220,220,1)",
+			            data: vals[i]
+			        }
+			    ]
+			};
+
+			var ctx = document.getElementById(subkey).getContext("2d")
+			var barChart = new Chart(ctx).Bar(chart);
 		}
 	};
+	
 	var checkBoxSample = '<div><label style="padding: 8px;">LABEL</label><input type="checkbox" value="LABEL" CHECKED /></div>';
 	var infoSample = '<div><p>TEXT</p></div>'
 };

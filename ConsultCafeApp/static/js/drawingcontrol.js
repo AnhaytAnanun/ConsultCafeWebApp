@@ -41,8 +41,8 @@ function computeIt(modalId) {
 		maxAge: $("#age-slider").slider( "values", 1),
 		sex: sex
 	}, function(data) {
-		modal.setModalContent(this, data);
 		$(modalId).modal('show');
+		modal.setModalContent(data);
 	});
 	
 };

@@ -18,6 +18,7 @@
 		<script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=drawing"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+		<script src="http://www.chartjs.org/assets/Chart.min.js"></script>
 		<script src="../static/js/map.js"></script>
 		<script src="../static/js/modal.js"></script>
 		<script src="../static/js/drawingcontrol.js"></script>
@@ -46,6 +47,8 @@
 						curPolygon.setMap(null);
 					curPolygon = polygon;
 				};
+
+				$('span').tooltip();
 			};
 			
 			function computeItFirstStep() {
@@ -126,14 +129,31 @@
 				</div>
 			</div>
 		</div>
+
 		<!-- Modal -->
 		<div class="modal fade" id="bizsugmodal" tabindex="-1" role="dialog">
-			<div class="modal-dialog">
+			<div class="modal-dialog" style="width: 700px;">
 				<div class="modal-content">
 					<div class="modal-header">
 						Scores for Different Criteria
 					</div>
-					<div class="modal-body" id="infomodalcontent">
+					<div class="modal-body" id="infomodalcontent" style="width: 700px; height: 760px">
+						<div style="float: left">
+							<h3><span class="label label-default" style="margin-left: 10px;" data-placement="top" data-toggle="tooltip" href="#" data-original-title="Higher rate, higher is interest of people to your business">User Score</span></h3>
+							<canvas id="userScore" width="300" height="300" style="float: left"></canvas>
+						</div>
+						<div style="float: left">
+							<h3><span class="label label-default" style="margin-left: 10px;" data-toggle="tooltip" href="#" data-original-title="Approximate possible wage cost">Wages Score</span></h3>
+							<canvas id="wagesScore" width="300" height="300" style="float: left"></canvas>
+						</div>
+						<div style="float: left">
+							<h3><span class="label label-default" style="margin-left: 10px;"data-toggle="tooltip" href="#" data-original-title="Approximate possible income">Income Score</span></h3>
+							<canvas id="incomeScore" width="300" height="300" style="float: left"></canvas>
+						</div>
+						<div style="float: left">
+							<h3><span class="label label-default" style="margin-left: 10px;" data-toggle="tooltip" href="#" data-original-title="Higher rate, higher possible number customers per day">Customers Score</span></h3>
+							<canvas id="customersScore" width="300" height="300" style="float: left"></canvas>
+						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-primary submitButton" data-dismiss="modal">Okay</button>

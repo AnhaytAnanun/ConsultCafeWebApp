@@ -68,8 +68,8 @@ def businessForLocation(request):
 			wages = wages + resto.wages
 			restoCount = restoCount + 1
 
-		data[buseness.name]['wagesScore'] = (wages + buseness.wage * 2) / restoCount
-		data[buseness.name]['incomeScore'] = (income + buseness.income * 2) / restoCount
+		data[buseness.name]['wagesScore'] = (wages + buseness.wage) / (restoCount + 1)
+		data[buseness.name]['incomeScore'] = (income + buseness.income) / (restoCount + 1)
 		data[buseness.name]['customersScore'] = userCount * 1.35 - restoMaxCustomers * 0.75
 
 	logger.error(data)
