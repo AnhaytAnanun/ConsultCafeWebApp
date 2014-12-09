@@ -5,7 +5,7 @@ function displaySuitabilityMap(map) {
 	if(googleRects.length > 0)
 		return;
 	var bounds = map.getBounds();
-	var res = 25;
+	var res = 30;
 	
 	var startx = bounds.getNorthEast().lng();
 	var stepx= (bounds.getSouthWest().lng() - startx)/res;
