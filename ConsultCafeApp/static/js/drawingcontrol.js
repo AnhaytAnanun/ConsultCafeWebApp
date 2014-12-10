@@ -25,6 +25,7 @@ function computeIt(modalId) {
 	stopPolygon();
 	if(curPolygon == null)
 		return;
+	dotheanimation();
 	var backendString = makeBackendstring(curPolygon.getPath().getArray());
 	var sex = [];
 
@@ -41,6 +42,7 @@ function computeIt(modalId) {
 		maxAge: $("#age-slider").slider( "values", 1),
 		sex: sex
 	}, function(data) {
+		dotheanimation();
 		$(modalId).modal('show');
 		modal.setModalContent(data);
 	});

@@ -13,6 +13,7 @@
 		<script src={% static "vendor/js/bootstrap.min.js" %}></script>-->
 		<link rel="stylesheet" type="text/css" href="../static/vendor/css/bootstrap.css">
 		<link rel="stylesheet" type="text/css" href="../static/css/main.css">
+		<link rel="stylesheet" type="text/css" href="../static/css/loadingAnim.css">
 		<link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700' rel='stylesheet' type='text/css'>
 		<script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=drawing"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -50,9 +51,13 @@
 			function fadeItOut(footerbar) {
 				$(this).fadeTo(50, 0.7);
 			};
+			function dotheanimation() {
+				$('#loadinglayer').toggle();
+			};
 			$(function () {
 				tmp = $('.footerbar');
 				tmp.hover(fadeItIn, fadeItOut);
+				dotheanimation();
 			});
 		</script>
 	</head>
@@ -77,6 +82,13 @@
 						  <button type="button" class="btn btn-primary footerbarbutton" data-toggle="modal" data-target="#menugenmodal" onclick="suggestMenu()">compute</button>
 						</div>
 					</div>
+				</div>
+				<div id="loadinglayer">
+					<div id="bowlG" style="opacity:1.;">
+					<div id="bowl_ringG">
+					<div class="ball_holderG">
+					<div class="ballG">
+					</div></div></div></div>
 				</div>
 			</div>
 		</div>

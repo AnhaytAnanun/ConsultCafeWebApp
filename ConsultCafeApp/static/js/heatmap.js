@@ -84,6 +84,7 @@ function HeatMap() {
 	}
 
 	this.regenPeople = function() {
+		dotheanimation();
     	peoplelocs.query(generatePeopleQuery(this.heatMapOptions['restaurant']), function(data) {
 			var coords = [];
 
@@ -98,6 +99,7 @@ function HeatMap() {
 				data: coords
 			});
 		});
+		dotheanimation();
     }
 
 	this.setRadius = function(rad) {

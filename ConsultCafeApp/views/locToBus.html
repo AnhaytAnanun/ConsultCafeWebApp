@@ -13,6 +13,7 @@
 		<script src={% static "vendor/js/bootstrap.min.js" %}></script>-->
 		<link rel="stylesheet" type="text/css" href="../static/vendor/css/bootstrap.css">
 		<link rel="stylesheet" type="text/css" href="../static/css/main.css">
+		<link rel="stylesheet" type="text/css" href="../static/css/loadingAnim.css">
 		<link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
 		<script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=drawing"></script>
@@ -50,12 +51,6 @@
 
 				$('span').tooltip();
 			};
-			
-			function computeItFirstStep() {
-				var scoresJSON = computeIt();
-				
-			};
-			
 			google.maps.event.addDomListener(window, 'load', initialize);
 		</script>
 		<script>
@@ -87,7 +82,11 @@
 			$('.thatDiv').hover(viewSubmenus, closeSubmenus);
 			var tmp = $('.footerbar');
 			tmp.hover(fadeItIn, fadeItOut);
+			$('#loadinglayer').toggle();
 		});
+		function dotheanimation() {
+			$('#loadinglayer').toggle();
+		};
 		</script>
 	</head>
 	<body>
@@ -114,6 +113,7 @@
 								</div>
 							</div>
 						</div>
+					<button type="button" class="btn btn-primary sidebarbutton logoutbutton">Log Out</button>
 				</div>
 				<div class="col-xs-10 fullheight">
 					<div id="map-canvas" class="fullscreen">
@@ -126,6 +126,13 @@
 						  <button type="button" class="btn btn-primary footerbarbutton" onclick="computeIt(bizsugmodal)">compute</button>
 						</div>
 					</div>
+				</div>
+				<div id="loadinglayer">
+					<div id="bowlG" style="opacity:1.;">
+					<div id="bowl_ringG">
+					<div class="ball_holderG">
+					<div class="ballG">
+					</div></div></div></div>
 				</div>
 			</div>
 		</div>

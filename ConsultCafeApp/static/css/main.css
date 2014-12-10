@@ -56,6 +56,11 @@
 	padding: 15px;
 }
 
+.logoutbutton {
+	position: absolute;
+	bottom:0;
+}
+
 .upper-right{
 	bottom: 5px;
 	padding: 15px;
